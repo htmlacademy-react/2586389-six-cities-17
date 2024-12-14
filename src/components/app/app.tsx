@@ -7,29 +7,35 @@ import Offer from '../../pages/different-section/offer/offer';
 import NotFound from '../../pages/different-section/not-found/not-found';
 import Login from '../../pages/different-section/login/login';
 import PrivateRoute from '../private-route/private-route';
+import { Offers, OffersExtended, Reviews } from '../../types/types';
 
-type AppProps = {
-    numberRentals: number;
+export interface AppProps {
+      offers: Offers[];
+  // eslint-disable-next-line react/no-unused-prop-types
+      offersExtended?: OffersExtended;
+  // eslint-disable-next-line react/no-unused-prop-types
+      reviews?: Reviews[];
 }
 
-function App({numberRentals}: AppProps): JSX.Element {
+function App({offers}: AppProps): JSX.Element {
+
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route path={AppRoute.Main}>
-            <Route index element={<Main numberRentals={numberRentals} />} />
+            <Route index element={<Main offers={offers} />} />
             <Route
               path={AppRoute.Favorites}
               element={
-                <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-                  <Favorites />
+                <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+                  <Favorites offers={offers}/>
                 </PrivateRoute>
               }
             />
-            <Route path={AppRoute.Offer} element={<Offer />} />
+            <Route path={AppRoute.Offer} element={<Offer offers={offers}/>} />
             <Route path={AppRoute.Login} element={<Login />} />
-            <Route path='*' element={<NotFound />} />
+            <Route path={AppRoute.NotFound} element={<NotFound />} />
           </Route>
         </Routes>
       </BrowserRouter>

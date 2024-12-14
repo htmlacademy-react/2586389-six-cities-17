@@ -1,15 +1,17 @@
 import { Helmet } from 'react-helmet-async';
-import CardOffer from '../../identical-section/card-offer/card-offer';
 import Header from '../../identical-section/header/header';
 import Locations from '../../identical-section/locations/locations';
 import CitiesMap from '../../identical-section/cities-map/cities-map';
 import CitiesPlaces from '../../identical-section/cities-places/cities-places';
+import { Offers } from '../../../types/types';
+import CardOfferList from '../../identical-section/card/card-offer-list/card-offer-list.tsx';
 
-type MainProps = {
-  numberRentals: number;
+export interface MainProps {
+  offers: Offers[];
 }
 
-function Main({numberRentals}: MainProps): JSX.Element {
+function Main({ offers }: MainProps,): JSX.Element {
+
   return(
     <div className="page page--gray page--main">
       <Helmet>
@@ -22,12 +24,8 @@ function Main({numberRentals}: MainProps): JSX.Element {
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
-              <CitiesPlaces />
-              <div className="cities__places-list places__list tabs__content">
-                {Array.from({ length: numberRentals }, (_, index) => (
-                  <CardOffer key={index} />
-                ))}
-              </div>
+              <CitiesPlaces offers={offers} />
+              <CardOfferList offers={offers} />
             </section>
             <CitiesMap />
           </div>

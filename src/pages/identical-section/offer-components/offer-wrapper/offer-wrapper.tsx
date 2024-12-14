@@ -2,13 +2,18 @@ import Bookmark from '../../bookmark/bookmark';
 import Premium from '../../premium/premium';
 import Rating from '../../rating/rating';
 import OfferHost from '../offer-host/offer-host';
-import OfferReviews from '../offer-reviews/offer-reviews';
+import {Offers} from '../../../../types/types.ts';
+import FormSendingComments from '../../../../components/form-sending-comments/form-sending.comments.tsx';
 
-function OfferWrapper (): JSX.Element {
+interface OfferWraperProps {
+  offers: Offers[];
+}
+
+function OfferWrapper ({offers}: OfferWraperProps): JSX.Element {
   return(
     <div className="offer__container container">
       <div className="offer__wrapper">
-        <Premium />
+        <Premium offers={offers}/>
         <div className="offer__name-wrapper">
           <h1 className="offer__name">
           Beautiful &amp; luxurious studio at great location
@@ -45,7 +50,7 @@ function OfferWrapper (): JSX.Element {
           </ul>
         </div>
         <OfferHost />
-        <OfferReviews />
+        <FormSendingComments />
       </div>
     </div>
   );
