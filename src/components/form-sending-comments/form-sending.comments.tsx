@@ -1,23 +1,31 @@
 import {useState, ChangeEvent} from 'react';
+import{FormSendingCommentsProps, Ratings} from '../../types/types.ts';
+import FormSendingRatings from './form-sending-rating/form-sending-rating.tsx';
 
-interface FormSendingCommentsProps {
-  rating: number;
-  review: string;
-}
+const initialValues: FormSendingCommentsProps = {
+  rating: 0,
+  review: ''
+};
+
+const ratings: Ratings = [
+  [1, 'terribly'],
+  [2, 'badly'],
+  [3, 'not bad'],
+  [4, 'good'],
+  [5, 'perfect'],
+];
 
 function FormSendingComments():JSX.Element {
-  const initialValues: FormSendingCommentsProps = {
-    rating: 0,
-    review: ''
-  };
 
   const [formData, setFormData] = useState(initialValues);
-  const [isButtonOffer, setIsButtonOffer] = useState<boolean>(true);
+  const [isButtonOffer, setIsButtonOffer] = useState(true);
 
   const handleValueChange = (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     inputName: keyof FormSendingCommentsProps
   ) => {
     const value = evt.target.value;
+
+    const FormDataLength = formData.review.length > 50 && formData.review.length < 300;
 
     if (evt.target instanceof HTMLInputElement || evt.target instanceof HTMLTextAreaElement) {
       setFormData((prevState) => ({
@@ -26,7 +34,7 @@ function FormSendingComments():JSX.Element {
       }));
     }
 
-    if(formData.review.length > 50 && formData.review.length < 300) {
+    if(FormDataLength) {
       setIsButtonOffer(false);
     }
   };
@@ -35,98 +43,19 @@ function FormSendingComments():JSX.Element {
     evt.preventDefault();
     setFormData(initialValues);
   };
+
   return (
-    <form className="reviews__form form" action="#" method="post" onSubmit={handleSubmitForm}>
+    <form className="reviews__form form" onSubmit={handleSubmitForm}>
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
       <div className="reviews__rating-form form__rating">
-        <input
-          className="form__rating-input visually-hidden"
-          name="rating"
-          defaultValue={5}
-          id="5-stars"
-          type="radio"
-          onChange={(evt) => handleValueChange(evt, 'rating')}
-        />
-        <label
-          htmlFor="5-stars"
-          className="reviews__rating-label form__rating-label"
-          title="perfect"
-        >
-          <svg className="form__star-image" width={37} height={33}>
-            <use xlinkHref="#icon-star"/>
-          </svg>
-        </label>
-        <input
-          className="form__rating-input visually-hidden"
-          name="rating"
-          defaultValue={4}
-          id="4-stars"
-          type="radio"
-          onChange={(evt) => handleValueChange(evt, 'rating')}
-        />
-        <label
-          htmlFor="4-stars"
-          className="reviews__rating-label form__rating-label"
-          title="good"
-        >
-          <svg className="form__star-image" width={37} height={33}>
-            <use xlinkHref="#icon-star"/>
-          </svg>
-        </label>
-        <input
-          className="form__rating-input visually-hidden"
-          name="rating"
-          defaultValue={3}
-          id="3-stars"
-          type="radio"
-          onChange={(evt) => handleValueChange(evt, 'rating')}
-        />
-        <label
-          htmlFor="3-stars"
-          className="reviews__rating-label form__rating-label"
-          title="not bad"
-        >
-          <svg className="form__star-image" width={37} height={33}>
-            <use xlinkHref="#icon-star"/>
-          </svg>
-        </label>
-        <input
-          className="form__rating-input visually-hidden"
-          name="rating"
-          defaultValue={2}
-          id="2-stars"
-          type="radio"
-          onChange={(evt) => handleValueChange(evt, 'rating')}
-        />
-        <label
-          htmlFor="2-stars"
-          className="reviews__rating-label form__rating-label"
-          title="badly"
-        >
-          <svg className="form__star-image" width={37} height={33}>
-            <use xlinkHref="#icon-star"/>
-          </svg>
-        </label>
-        <input
-          className="form__rating-input visually-hidden"
-          name="rating"
-          defaultValue={1}
-          id="1-star"
-          type="radio"
-          onChange={(evt) => handleValueChange(evt, 'rating')}
-        />
-        <label
-          htmlFor="1-star"
-          className="reviews__rating-label form__rating-label"
-          title="terribly"
-        >
-          <svg className="form__star-image" width={37} height={33}>
-            <use xlinkHref="#icon-star"/>
-          </svg>
-        </label>
+        {ratings.map(([value, title]) => (
+          <FormSendingRatings key={value} value={value} title={title} handleValueChange={handleValueChange} />
+        )
+        )}
       </div>
+
       <textarea
         className="reviews__textarea form__textarea"
         id="review"

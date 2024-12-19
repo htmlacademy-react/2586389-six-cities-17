@@ -1,6 +1,6 @@
-import { OffersExtended } from '../types/types';
+import { OfferExtended } from '../types/types';
 
-export const offersExtended: OffersExtended = {
+export const offerExtended: OfferExtended = {
   'id': 'ae9218e7-dfe9-4d3d-b807-a0fdff9d0a58',
   'title': 'Beautiful & luxurious apartment at great location',
   'description': 'I rent out a very sunny and bright apartment only 7 minutes walking distance to the metro station. The apartment has a spacious living room with a kitchen, one bedroom and a bathroom with mit bath. A terrace can be used in summer.',

@@ -1,11 +1,6 @@
-const OffersNumberRentals = {
-  NumberRentals: 5,
-} as const;
+export const URL_MARKER_DEFAULT =
+  '../markup/img/pin.svg';
 
-export default OffersNumberRentals;
+export const URL_MARKER_CURRENT =
+  '../markup/img/pin-active.svg';
 
-// eslint-disable-next-line react-refresh/only-export-components
-export const cities = {
-  countPlaces: 5,
-  cities: ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf']
-};

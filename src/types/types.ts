@@ -27,7 +27,7 @@ export interface Offers extends OfferIrregular {
     city: City;
 }
 
-export interface OffersExtended extends Offers {
+export interface OfferExtended extends Offers {
     description: string;
     images: string[];
     goods: string[];
@@ -61,4 +61,11 @@ export interface User {
 export interface IsFavorite {
   isFavorite: boolean;
 }
+
+export interface FormSendingCommentsProps {
+  rating: number;
+  review: string;
+}
+
+export type Ratings = readonly [number, string][];
 

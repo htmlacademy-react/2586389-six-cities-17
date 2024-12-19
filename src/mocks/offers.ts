@@ -8,16 +8,16 @@ export const offers: Offers[] = [
     'price': 198,
     'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/9.jpg',
     'city': {
-      'name': 'Paris',
+      'name': 'Amsterdam',
       'location': {
-        'latitude': 48.85661,
-        'longitude': 2.351499,
+        'latitude': 52.3676,
+        'longitude': 4.9041,
         'zoom': 13
       }
     },
     'location': {
-      'latitude': 48.868610000000004,
-      'longitude': 2.342499,
+      'latitude': 52.3909553943508,
+      'longitude': 4.85309666406198,
       'zoom': 16
     },
     'isFavorite': false,
@@ -31,16 +31,16 @@ export const offers: Offers[] = [
     'price': 210,
     'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/20.jpg',
     'city': {
-      'name': 'Paris',
+      'name': 'Amsterdam',
       'location': {
-        'latitude': 48.85661,
-        'longitude': 2.351499,
+        'latitude': 52.3676,
+        'longitude': 4.9041,
         'zoom': 13
       }
     },
     'location': {
-      'latitude': 48.858610000000006,
-      'longitude': 2.330499,
+      'latitude': 52.3609553943508,
+      'longitude': 4.85309666406198,
       'zoom': 16
     },
     'isFavorite': false,
@@ -54,16 +54,16 @@ export const offers: Offers[] = [
     'price': 195,
     'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/13.jpg',
     'city': {
-      'name': 'Paris',
+      'name': 'Amsterdam',
       'location': {
-        'latitude': 48.85661,
-        'longitude': 2.351499,
+        'latitude': 52.3676,
+        'longitude': 4.9041,
         'zoom': 13
       }
     },
     'location': {
-      'latitude': 48.834610000000005,
-      'longitude': 2.335499,
+      'latitude': 52.3909553943508,
+      'longitude': 4.929309666406198,
       'zoom': 16
     },
     'isFavorite': false,
@@ -77,16 +77,16 @@ export const offers: Offers[] = [
     'price': 375,
     'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/9.jpg',
     'city': {
-      'name': 'Paris',
+      'name': 'Amsterdam',
       'location': {
-        'latitude': 48.85661,
-        'longitude': 2.351499,
+        'latitude': 52.3676,
+        'longitude': 4.9041,
         'zoom': 13
       }
     },
     'location': {
-      'latitude': 48.85761,
-      'longitude': 2.358499,
+      'latitude': 52.3809553943508,
+      'longitude': 4.939309666406198,
       'zoom': 16
     },
     'isFavorite': false,
@@ -100,7 +100,7 @@ export const offers: Offers[] = [
     'price': 159,
     'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/6.jpg',
     'city': {
-      'name': 'Paris',
+      'name': 'Amsterdam',
       'location': {
         'latitude': 48.85661,
         'longitude': 2.351499,
@@ -123,7 +123,7 @@ export const offers: Offers[] = [
     'price': 512,
     'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/15.jpg',
     'city': {
-      'name': 'Paris',
+      'name': 'Amsterdam',
       'location': {
         'latitude': 48.85661,
         'longitude': 2.351499,
@@ -146,7 +146,7 @@ export const offers: Offers[] = [
     'price': 479,
     'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/4.jpg',
     'city': {
-      'name': 'Paris',
+      'name': 'Amsterdam',
       'location': {
         'latitude': 48.85661,
         'longitude': 2.351499,
@@ -169,7 +169,7 @@ export const offers: Offers[] = [
     'price': 703,
     'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/14.jpg',
     'city': {
-      'name': 'Paris',
+      'name': 'Amsterdam',
       'location': {
         'latitude': 48.85661,
         'longitude': 2.351499,
@@ -192,7 +192,7 @@ export const offers: Offers[] = [
     'price': 932,
     'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/11.jpg',
     'city': {
-      'name': 'Paris',
+      'name': 'Amsterdam',
       'location': {
         'latitude': 48.85661,
         'longitude': 2.351499,
@@ -215,7 +215,7 @@ export const offers: Offers[] = [
     'price': 143,
     'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/5.jpg',
     'city': {
-      'name': 'Paris',
+      'name': 'Amsterdam',
       'location': {
         'latitude': 48.85661,
         'longitude': 2.351499,
@@ -238,16 +238,16 @@ export const offers: Offers[] = [
     'price': 148,
     'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/3.jpg',
     'city': {
-      'name': 'Paris',
+      'name': 'Amsterdam',
       'location': {
-        'latitude': 48.85661,
-        'longitude': 2.351499,
+        'latitude': 51.2277,
+        'longitude': 6.7735,
         'zoom': 13
       }
     },
     'location': {
-      'latitude': 48.83861,
-      'longitude': 2.350499,
+      'latitude': 51.2277,
+      'longitude': 6.7735,
       'zoom': 16
     },
     'isFavorite': false,

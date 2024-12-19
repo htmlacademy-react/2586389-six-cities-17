@@ -8,7 +8,7 @@ interface CardOfferListProps {
 }
 
 function CardOfferList({offers}: CardOfferListProps):JSX.Element {
-  const [activeOfferCardId, setActiveOfferCardId] = useState<string | null>(null);
+  const [activeOfferCardId, setActiveOfferCardId] = useState('');
 
   // eslint-disable-next-line no-console
   console.log(activeOfferCardId);
@@ -17,7 +17,7 @@ function CardOfferList({offers}: CardOfferListProps):JSX.Element {
     setActiveOfferCardId(id);
   };
   const offerCardMouseLeaveHandler = (): void => {
-    setActiveOfferCardId(null);
+    setActiveOfferCardId('');
   };
   return (
     <div className="cities__places-list places__list tabs__content">
