@@ -7,24 +7,25 @@ import Offer from '../../pages/different-section/offer/offer';
 import NotFound from '../../pages/different-section/not-found/not-found';
 import Login from '../../pages/different-section/login/login';
 import PrivateRoute from '../private-route/private-route';
-import { Offers, OffersExtended, Reviews } from '../../types/types';
+import { Offers, OfferExtended, Reviews, City } from '../../types/types';
 
 export interface AppProps {
       offers: Offers[];
+      cities: City[];
   // eslint-disable-next-line react/no-unused-prop-types
-      offersExtended?: OffersExtended;
+      offerExtended?: OfferExtended;
   // eslint-disable-next-line react/no-unused-prop-types
       reviews?: Reviews[];
 }
 
-function App({offers}: AppProps): JSX.Element {
+function App({offers,cities}: AppProps): JSX.Element {
 
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route path={AppRoute.Main}>
-            <Route index element={<Main offers={offers} />} />
+            <Route index element={<Main offers={offers} city={cities} />} />
             <Route
               path={AppRoute.Favorites}
               element={
