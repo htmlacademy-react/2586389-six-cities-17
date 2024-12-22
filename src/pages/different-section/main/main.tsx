@@ -36,10 +36,18 @@ function Main({ offers, city }: MainProps): JSX.Element {
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
-              <CitiesPlaces offers={offers} />
-              <CardOfferList offers={offers} />
+              <CitiesPlaces offers={offers}/>
+              <CardOfferList
+                offers={filteredOffers}
+                cardType="cities"
+                listClassName="cities__places places__list tabs__content"
+                cardClassName="cities__card"
+                imageWrapperClassName="cities__image-wrapper"
+              />
             </section>
-            <Map city={selectedCity || city[0]} offers={filteredOffers} selectedOffers={null} />
+            <div className="cities__right-section">
+              <Map mapClassName="cities__map map" city={selectedCity || city[0]} offers={filteredOffers} selectedOffers={null}/>
+            </div>
           </div>
         </div>
       </main>

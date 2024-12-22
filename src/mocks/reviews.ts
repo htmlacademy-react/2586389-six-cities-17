@@ -16,7 +16,7 @@ export const reviews: Reviews[] = [
     'id': 'f22b5e32-2770-4480-8eb8-adadbb4752ca',
     'comment': 'Bathed in the nature. Completely unplugged. Unforgettable.',
     'date': '2024-11-05T21:00:00.490Z',
-    'rating': 4,
+    'rating': 3,
     'user': {
       'name': 'Max',
       'avatarUrl': 'https://16.design.htmlacademy.pro/static/avatar/8.jpg',
