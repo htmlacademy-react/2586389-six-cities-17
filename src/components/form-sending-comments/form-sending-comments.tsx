@@ -1,6 +1,7 @@
 import {useState, ChangeEvent} from 'react';
 import{FormSendingCommentsProps, Ratings} from '../../types/types.ts';
 import FormSendingRatings from './form-sending-rating/form-sending-rating.tsx';
+import {MIN_LENGTH_OF_REVIEW, MAX_LENGTH_OF_REVIEW} from '../../variables/variables.tsx';
 
 const initialValues: FormSendingCommentsProps = {
   rating: 0,
@@ -20,21 +21,21 @@ function FormSendingComments():JSX.Element {
   const [formData, setFormData] = useState(initialValues);
   const [isButtonOffer, setIsButtonOffer] = useState(true);
 
-  const handleValueChange = (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    inputName: keyof FormSendingCommentsProps
+  const handleValueChange = (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const value = evt.target.value;
 
-    const FormDataLength = formData.review.length > 50 && formData.review.length < 300;
+    const {name, value} = evt.target;
+
+    const formDataLength = formData.review.length > MIN_LENGTH_OF_REVIEW && formData.review.length < MAX_LENGTH_OF_REVIEW;
 
     if (evt.target instanceof HTMLInputElement || evt.target instanceof HTMLTextAreaElement) {
       setFormData((prevState) => ({
         ...prevState,
-        [inputName]: value,
+        [name]: value,
       }));
     }
 
-    if(FormDataLength) {
+    if(formDataLength) {
       setIsButtonOffer(false);
     }
   };
@@ -62,7 +63,7 @@ function FormSendingComments():JSX.Element {
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         value={formData.review}
-        onChange={(evt) => handleValueChange(evt, 'review')}
+        onChange={handleValueChange}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
