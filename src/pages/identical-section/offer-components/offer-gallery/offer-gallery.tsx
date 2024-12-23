@@ -1,49 +1,24 @@
-function OfferGallery(): JSX.Element {
+import {OfferExtended} from '../../../../types/types.ts';
+
+interface OfferGalleryProps {
+  offerExtended: OfferExtended;
+}
+
+function OfferGallery({offerExtended}: OfferGalleryProps): JSX.Element {
+  const {images, id} = offerExtended;
+
   return(
     <div className="offer__gallery-container container">
       <div className="offer__gallery">
-        <div className="offer__image-wrapper">
-          <img
-            className="offer__image"
-            src="img/room.jpg"
-            alt="Photo studio"
-          />
-        </div>
-        <div className="offer__image-wrapper">
-          <img
-            className="offer__image"
-            src="img/apartment-01.jpg"
-            alt="Photo studio"
-          />
-        </div>
-        <div className="offer__image-wrapper">
-          <img
-            className="offer__image"
-            src="img/apartment-02.jpg"
-            alt="Photo studio"
-          />
-        </div>
-        <div className="offer__image-wrapper">
-          <img
-            className="offer__image"
-            src="img/apartment-03.jpg"
-            alt="Photo studio"
-          />
-        </div>
-        <div className="offer__image-wrapper">
-          <img
-            className="offer__image"
-            src="img/studio-01.jpg"
-            alt="Photo studio"
-          />
-        </div>
-        <div className="offer__image-wrapper">
-          <img
-            className="offer__image"
-            src="img/apartment-01.jpg"
-            alt="Photo studio"
-          />
-        </div>
+        {images.map((image) => (
+          <div className="offer__image-wrapper" key={id}>
+            <img
+              className="offer__image"
+              src={image}
+              alt="Photo studio"
+            />
+          </div>
+        ))}
       </div>
     </div>
   );

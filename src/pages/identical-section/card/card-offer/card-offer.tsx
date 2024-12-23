@@ -11,16 +11,29 @@ interface CardOfferProps {
     cardType: 'favorites' | 'near-places' | 'cities';
     onOfferCardMouseEnter?: () => void;
     onOfferCardMouseLeave?: () => void;
+    cardClassName?: string;
+    imageWrapperClassName?: string;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-shadow
-function CardOffer({offers, offersPremium, cardType, onOfferCardMouseEnter, onOfferCardMouseLeave}: CardOfferProps): JSX.Element {
+function CardOffer(
+  {offers,
+    offersPremium,
+    cardType,
+    onOfferCardMouseEnter,
+    onOfferCardMouseLeave,
+    cardClassName = '',
+    imageWrapperClassName = ''}
+    : CardOfferProps): JSX.Element {
   const { id, previewImage, price, isFavorite, rating, title, type } = offers;
 
   return(
-    <article className={`${cardType}__card place-card`} onMouseEnter={onOfferCardMouseEnter} onMouseLeave={onOfferCardMouseLeave}>
+    <article className={`${cardType}__card place-card ${cardClassName}`}
+      onMouseEnter={onOfferCardMouseEnter}
+      onMouseLeave={onOfferCardMouseLeave}
+    >
       <Premium offers={offersPremium}/>
-      <div className={`${cardType}__image-wrapper place-card__image-wrapper`}>
+      <div className={`${cardType}__image-wrapper place-card__image-wrapper ${imageWrapperClassName}`}>
         <Link to={generatePath(AppRoute.Offer, {id})}>
           <img
             className="place-card__image"
