@@ -8,7 +8,7 @@ function UseMap(mapRef: MutableRefObject<HTMLElement | null>, city: City): leafl
   const isRenderedRef = useRef(false);
 
   useEffect(() => {
-    if (mapRef.current !== null && !isRenderedRef.current) {
+    if (mapRef.current && !isRenderedRef.current) {
       const instance = new Map(mapRef.current, {
         center: {
           lat: city.location.latitude,

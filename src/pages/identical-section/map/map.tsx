@@ -9,6 +9,7 @@ interface MapProps {
   city: City;
   offers: Offers[];
   selectedOffers: Offers | null;
+  mapClassName?: string;
 }
 
 const defaultMapIcon = new Icon({
@@ -23,7 +24,7 @@ const currentMapIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
-function Map({city, offers, selectedOffers}: MapProps): JSX.Element {
+function Map({city, offers, selectedOffers, mapClassName = ''}: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = UseMap(mapRef, city);
 
@@ -55,10 +56,8 @@ function Map({city, offers, selectedOffers}: MapProps): JSX.Element {
   }, [map, offers, selectedOffers]);
 
   return (
-    <div className="cities__right-section">
-      <section className="cities__map map" ref={mapRef}>
-      </section>
-    </div>
+    <section className={mapClassName} ref={mapRef}>
+    </section>
   );
 }
 

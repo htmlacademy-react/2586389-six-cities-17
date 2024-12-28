@@ -1,10 +1,9 @@
 import {ChangeEvent} from 'react';
-import {FormSendingCommentsProps} from '../../../types/types.ts';
 
 interface FormSendingRatingsProps {
   value: number;
   title: string;
-  handleValueChange: (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, inputName: keyof FormSendingCommentsProps) => void;
+  handleValueChange: (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
 function FormSendingRatings ({value, title, handleValueChange}: FormSendingRatingsProps):JSX.Element {
@@ -16,7 +15,7 @@ function FormSendingRatings ({value, title, handleValueChange}: FormSendingRatin
         value={value}
         id={`${value}-stars`}
         type="radio"
-        onChange={(evt) => handleValueChange(evt, 'rating')}
+        onChange={handleValueChange}
       />
       <label
         htmlFor={`${value}-stars`}

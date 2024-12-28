@@ -5,9 +5,19 @@ import {Offers} from '../../../../types/types.ts';
 
 interface CardOfferListProps {
   offers: Offers[];
+  cardType: 'favorites' | 'near-places' | 'cities';
+  listClassName?: string;
+  cardClassName?: string;
+  imageWrapperClassName?: string;
 }
 
-function CardOfferList({offers}: CardOfferListProps):JSX.Element {
+function CardOfferList(
+  {offers,
+    cardType,
+    cardClassName,
+    listClassName,
+    imageWrapperClassName,
+  }: CardOfferListProps):JSX.Element {
   const [activeOfferCardId, setActiveOfferCardId] = useState('');
 
   // eslint-disable-next-line no-console
@@ -20,16 +30,17 @@ function CardOfferList({offers}: CardOfferListProps):JSX.Element {
     setActiveOfferCardId('');
   };
   return (
-    <div className="cities__places-list places__list tabs__content">
+    <div className={`places-list ${listClassName}`}>
       {offers.map((offer) => (
-        <CardOffer key={offer.id} offers={offer} offersPremium={offers}
-          cardType='cities'
-          onOfferCardMouseEnter={() => {
-            offerCardMouseEnterHandler(offer.id);
-          }}
-          onOfferCardMouseLeave={() => {
-            offerCardMouseLeaveHandler();
-          }}
+        <CardOffer
+          key={offer.id}
+          offers={offer}
+          offersPremium={offers}
+          cardType={cardType}
+          cardClassName={cardClassName}
+          imageWrapperClassName={imageWrapperClassName}
+          onOfferCardMouseEnter={() => offerCardMouseEnterHandler(offer.id)}
+          onOfferCardMouseLeave={offerCardMouseLeaveHandler}
         />
       ))}
     </div>

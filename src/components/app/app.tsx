@@ -13,12 +13,12 @@ export interface AppProps {
       offers: Offers[];
       cities: City[];
   // eslint-disable-next-line react/no-unused-prop-types
-      offerExtended?: OfferExtended;
+      offerExtended: OfferExtended;
   // eslint-disable-next-line react/no-unused-prop-types
-      reviews?: Reviews[];
+      reviews: Reviews[];
 }
 
-function App({offers,cities}: AppProps): JSX.Element {
+function App({offers,cities, reviews, offerExtended}: AppProps): JSX.Element {
 
   return (
     <HelmetProvider>
@@ -34,7 +34,7 @@ function App({offers,cities}: AppProps): JSX.Element {
                 </PrivateRoute>
               }
             />
-            <Route path={AppRoute.Offer} element={<Offer offers={offers}/>} />
+            <Route path={AppRoute.Offer} element={<Offer offers={offers} reviews={reviews} offerExtended={offerExtended}/>} />
             <Route path={AppRoute.Login} element={<Login />} />
             <Route path={AppRoute.NotFound} element={<NotFound />} />
           </Route>
