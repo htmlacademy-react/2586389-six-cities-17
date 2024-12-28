@@ -1,15 +1,16 @@
-import { Offers } from '../../../types/types';
+import { Offers} from '../../../types/types';
 import PlaceOptions from '../place-options/place-options';
 
 interface OffersProps {
   offers: Offers[];
+  selectedCity: string | null;
 }
 
-function CitiesPlaces({offers}: OffersProps): JSX.Element {
+function CitiesPlaces({offers, selectedCity}: OffersProps): JSX.Element {
   return(
     <>
       <h2 className="visually-hidden">Places</h2>
-      <b className="places__found">{offers.length} places to stay in Amsterdam</b>
+      <b className="places__found">{offers.length} places to stay in {selectedCity}</b>
       <form className="places__sorting" action="#" method="get">
         <span className="places__sorting-caption">Sort by</span>
         <span className="places__sorting-type" tabIndex={0}>

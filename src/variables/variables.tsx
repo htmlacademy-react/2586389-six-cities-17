@@ -4,3 +4,4 @@ export const URL_MARKER_DEFAULT =
 export const URL_MARKER_CURRENT =
   '../markup/img/pin-active.svg';
 
+export const CITYS_NAMES = ['Paris', 'Cologne' ,'Brussels' , 'Amsterdam', 'Hamburg', 'Dusseldorf'] ;

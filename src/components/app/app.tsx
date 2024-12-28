@@ -25,7 +25,7 @@ function App({offers,cities}: AppProps): JSX.Element {
       <BrowserRouter>
         <Routes>
           <Route path={AppRoute.Main}>
-            <Route index element={<Main offers={offers} city={cities} />} />
+            <Route index element={<Main city={cities} />} />
             <Route
               path={AppRoute.Favorites}
               element={

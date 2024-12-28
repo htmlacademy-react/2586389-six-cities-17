@@ -68,4 +68,3 @@ export interface FormSendingCommentsProps {
 }
 
 export type Ratings = readonly [number, string][];
-
