@@ -2,27 +2,28 @@ import { Helmet } from 'react-helmet-async';
 import Header from '../../identical-section/header/header';
 import Locations from '../../identical-section/locations/locations';
 import CitiesPlaces from '../../identical-section/cities-places/cities-places';
-import { Offers, City } from '../../../types/types';
+import { City } from '../../../types/types';
 import CardOfferList from '../../identical-section/card/card-offer-list/card-offer-list.tsx';
 import Map from '../../identical-section/map/map';
-import {useState} from 'react';
+import { useAppSelector, useAppDispatch} from '../../../components/hooks';
+import {changeCity} from '../../../store/actions.ts';
 
 export interface MainProps {
-  offers: Offers[];
   city: City[];
 }
 
-function Main({ offers, city }: MainProps): JSX.Element {
-  const [selectedCity, setSelectedCity] = useState<City | null>(() => city.find((c) => c.name === 'Amsterdam') || city[0]);
+function Main({ city }: MainProps): JSX.Element {
+  const dispatch = useAppDispatch();
+  const offerCard = useAppSelector((state) => state.offerCard);
+  const selectedCity = useAppSelector((state) => state.currentCity);
 
   const handleOfferItemHover = (cityName: string) => {
-    const currentCity = city.find((c) => c.name === cityName) || null;
-    setSelectedCity(currentCity);
+    dispatch(changeCity(cityName));
   };
 
   const filteredOffers = selectedCity
-    ? offers.filter((offer) => offer.city.name === selectedCity.name)
-    : offers;
+    ? offerCard.filter((offer) => offer.city.name === selectedCity)
+    : offerCard;
 
   return (
     <div className="page page--gray page--main">
@@ -36,18 +37,10 @@ function Main({ offers, city }: MainProps): JSX.Element {
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
-              <CitiesPlaces offers={offers}/>
-              <CardOfferList
-                offers={filteredOffers}
-                cardType="cities"
-                listClassName="cities__places places__list tabs__content"
-                cardClassName="cities__card"
-                imageWrapperClassName="cities__image-wrapper"
-              />
+              <CitiesPlaces offers={filteredOffers} selectedCity={selectedCity}/>
+              <CardOfferList offers={filteredOffers} />
             </section>
-            <div className="cities__right-section">
-              <Map mapClassName="cities__map map" city={selectedCity || city[0]} offers={filteredOffers} selectedOffers={null}/>
-            </div>
+            <Map city={city.find((c) => c.name === selectedCity) || city[0]} offers={filteredOffers} selectedOffers={null} />
           </div>
         </div>
       </main>
