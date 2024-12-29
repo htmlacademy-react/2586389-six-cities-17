@@ -2,10 +2,12 @@ import {createReducer} from '@reduxjs/toolkit';
 import {changeCity, loadOffers} from './actions.ts';
 import {Offers} from '../types/types.ts';
 import {cities} from '../mocks/city.ts';
+import {SORT_TYPE} from '../variables/variables.tsx';
 
 const initialState = {
   currentCity: cities[3].name,
   offerCard: [] as Offers[],
+  currentSort: SORT_TYPE.popular,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -15,7 +17,10 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadOffers, (state, action) => {
       state.offerCard = action.payload;
-    });
+    })
+    .addCase(changeCity, (state, action) => {
+      state.currentCity = action.payload;
+  })
 });
 
 export {reducer};
