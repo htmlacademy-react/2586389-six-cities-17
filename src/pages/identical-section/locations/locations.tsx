@@ -4,7 +4,7 @@ import {City} from '../../../types/types.ts';
 interface LocationProps {
   cities: City[];
   onListOfferHover: (cityName: string) => void;
-  selectedCity: City | null;
+  selectedCity: string | null;
 }
 
 function Locations ({onListOfferHover, cities, selectedCity}: LocationProps): JSX.Element {
@@ -18,7 +18,7 @@ function Locations ({onListOfferHover, cities, selectedCity}: LocationProps): JS
         <ul className="locations__list tabs__list">
           {cities.map((city, index) => {
             const keyValue = `${index}-${city.name}`;
-            const isActive = selectedCity?.name === city.name;
+            const isActive = selectedCity === city.name;
 
             return (
               <li className="locations__item" key={keyValue} onMouseEnter={handleOfferItemHover}>
