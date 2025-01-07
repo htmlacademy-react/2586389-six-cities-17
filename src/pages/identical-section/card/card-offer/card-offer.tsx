@@ -6,16 +6,15 @@ import { generatePath } from 'react-router-dom';
 import Premium from '../../premium/premium.tsx';
 
 interface CardOfferProps {
-    offers: Offers;
-    offersPremium: Offers[];
-    cardType: 'favorites' | 'near-places' | 'cities';
-    onOfferCardMouseEnter?: () => void;
-    onOfferCardMouseLeave?: () => void;
-    cardClassName?: string;
-    imageWrapperClassName?: string;
+  offers: Offers;
+  offersPremium: Offers[];
+  cardType: 'favorites' | 'near-places' | 'cities';
+  onOfferCardMouseEnter?: () => void;
+  onOfferCardMouseLeave?: () => void;
+  cardClassName?: string;
+  imageWrapperClassName?: string;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-shadow
 function CardOffer(
   {offers,
     offersPremium,
@@ -24,11 +23,16 @@ function CardOffer(
     onOfferCardMouseLeave,
     cardClassName = '',
     imageWrapperClassName = ''}
-    : CardOfferProps): JSX.Element {
+  : CardOfferProps): JSX.Element {
   const { id, previewImage, price, isFavorite, rating, title, type } = offers;
 
+  // Определяем размеры изображения в зависимости от типа карточки
+  const imageW = cardType === 'favorites' ? '150' : '260';
+  const imageH = cardType === 'favorites' ? '110' : '200';
+
   return(
-    <article className={`${cardType}__card place-card ${cardClassName}`}
+    <article
+      className={`${cardType}__card place-card ${cardClassName}`}
       onMouseEnter={onOfferCardMouseEnter}
       onMouseLeave={onOfferCardMouseLeave}
     >
@@ -38,8 +42,8 @@ function CardOffer(
           <img
             className="place-card__image"
             src={previewImage}
-            width={260}
-            height={200}
+            width={imageW}
+            height={imageH}
             alt="Place image"
           />
         </Link>
