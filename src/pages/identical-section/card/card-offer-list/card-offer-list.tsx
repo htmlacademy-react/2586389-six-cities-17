@@ -38,7 +38,7 @@ function CardOfferList(
     }
   };
   return (
-    <div className={`places-list ${listClassName}`}>
+    <div className={`${cardType}__places-list places-list ${listClassName}`}>
       {offers.map((offer) => (
         <CardOffer
           key={offer.id}

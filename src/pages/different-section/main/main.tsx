@@ -56,23 +56,21 @@ function Main({ city }: MainProps): JSX.Element {
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{filteredOffers.length} places to stay in {selectedCity}</b>
               <SortingPlaces/>
-              <div className="places__list">
-                {sortedOfferCards.map((offerToCardSort) => (
-                  <CardOfferList
-                    key={offerToCardSort.id}
-                    offers={[offerToCardSort]}
-                    cardType="cities"
-                    onCardHover={handleCardHover}
-                  />
-                ))}
-              </div>
+              <CardOfferList
+                offers={sortedOfferCards} // Передаём весь массив предложений
+                cardType="cities"
+                onCardHover={handleCardHover}
+                listClassName="tabs__content"
+              />
             </section>
-            <Map
-              city={city.find((c) => c.name === selectedCity) || city[0]}
-              offers={filteredOffers}
-              selectedOffers={selectedOffer}
-              mapClassName="cities__map"
-            />
+            <div className="cities__right-section">
+              <Map
+                city={city.find((c) => c.name === selectedCity) || city[0]}
+                offers={filteredOffers}
+                selectedOffers={selectedOffer}
+                mapClassName="cities__map"
+              />
+            </div>
           </div>
         </div>
       </main>

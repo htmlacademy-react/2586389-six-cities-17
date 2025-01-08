@@ -1,5 +1,5 @@
 import {Offers} from './types/types.ts';
-import {SORT_TYPE, SortType} from './variables/variables.tsx';
+import {SortTypeList, SortType} from './variables/variables.tsx';
 
 export enum AppRoute {
     Main = '/',
@@ -21,13 +21,13 @@ const compareOffersTopRated = (a:Offers, b: Offers) => b.rating - a.rating;
 
 export const sortOffers = (offers: Offers[], sortingType: SortType): Offers[] => {
   switch (sortingType) {
-    case SORT_TYPE.popular:
+    case SortTypeList.popular:
       return offers;
-    case SORT_TYPE.price_low:
+    case SortTypeList.priceLow:
       return [...offers].sort(compareOffersPriceLow);
-    case SORT_TYPE.price_high:
+    case SortTypeList.priceHigh:
       return [...offers].sort(compareOffersPriceHigh);
-    case SORT_TYPE.top_rated:
+    case SortTypeList.topRated:
       return [...offers].sort(compareOffersTopRated);
 
     default:

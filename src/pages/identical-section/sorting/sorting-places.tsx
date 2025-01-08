@@ -1,4 +1,4 @@
-import {SORT_TYPE} from '../../../variables/variables.tsx';
+import {SortTypeList} from '../../../variables/variables.tsx';
 import {useDispatch} from 'react-redux';
 import {useEffect, useRef, useState} from 'react';
 import {useAppSelector} from '../../../components/hooks';
@@ -43,7 +43,7 @@ function SortingPlaces(): JSX.Element {
         </svg>
       </span>
       <ul className={`places__options places__options--custom ${sortingIsOpened ? 'places__options--opened' : ''}`}>
-        {Object.values(SORT_TYPE).map((sortItem) => (
+        {Object.values(SortTypeList).map((sortItem) => (
           <li
             key={sortItem}
             className={`places__option${sortItem === currentSort ? ' places__option--active' : ''}`}

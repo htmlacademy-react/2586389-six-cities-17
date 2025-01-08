@@ -1,7 +1,7 @@
 import {useState, ChangeEvent} from 'react';
 import{FormSendingCommentsProps, Ratings} from '../../types/types.ts';
 import FormSendingRatings from './form-sending-rating/form-sending-rating.tsx';
-import {MIN_LENGTH_OF_REVIEW, MAX_LENGTH_OF_REVIEW} from '../../variables/variables.tsx';
+import {MinLengthOfReview, MaxLengthOfReview} from '../../variables/variables.tsx';
 
 const initialValues: FormSendingCommentsProps = {
   rating: 0,
@@ -26,7 +26,7 @@ function FormSendingComments():JSX.Element {
 
     const {name, value} = evt.target;
 
-    const formDataLength = formData.review.length > MIN_LENGTH_OF_REVIEW && formData.review.length < MAX_LENGTH_OF_REVIEW;
+    const formDataLength = formData.review.length > MinLengthOfReview && formData.review.length < MaxLengthOfReview;
 
     if (evt.target instanceof HTMLInputElement || evt.target instanceof HTMLTextAreaElement) {
       setFormData((prevState) => ({
