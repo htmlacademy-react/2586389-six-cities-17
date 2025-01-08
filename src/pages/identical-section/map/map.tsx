@@ -2,7 +2,7 @@ import 'leaflet/dist/leaflet.css';
 import UseMap from '../../../components/hooks/use-map.tsx';
 import {useRef, useEffect} from 'react';
 import { Icon, Marker, layerGroup } from 'leaflet';
-import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT} from '../../../variables/variables.tsx';
+import {MarkerInfo} from '../../../variables/variables.tsx';
 import {Offers, City} from '../../../types/types.ts';
 
 interface MapProps {
@@ -13,15 +13,15 @@ interface MapProps {
 }
 
 const defaultMapIcon = new Icon({
-  iconUrl: URL_MARKER_DEFAULT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40]
+  iconUrl: MarkerInfo.UrlDef,
+  iconSize: [MarkerInfo.Width, MarkerInfo.Height],
+  iconAnchor: [MarkerInfo.Left, MarkerInfo.Top]
 });
 
 const currentMapIcon = new Icon({
-  iconUrl: URL_MARKER_CURRENT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40]
+  iconUrl: MarkerInfo.UrlAct,
+  iconSize: [MarkerInfo.Width, MarkerInfo.Height],
+  iconAnchor: [MarkerInfo.Left, MarkerInfo.Top]
 });
 
 function Map({city, offers, selectedOffers, mapClassName = ''}: MapProps): JSX.Element {
@@ -56,7 +56,7 @@ function Map({city, offers, selectedOffers, mapClassName = ''}: MapProps): JSX.E
   }, [map, offers, selectedOffers]);
 
   return (
-    <section className={mapClassName} ref={mapRef}>
+    <section className={`${mapClassName} map`} ref={mapRef}>
     </section>
   );
 }

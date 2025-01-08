@@ -53,7 +53,7 @@ function OfferWrapper ({offers, reviews, city, selectedOffer, offerExtended}: Of
         <OfferHost offerExtended={offerExtended}/>
         <ReviewsOfferList reviews={reviews} />
         <FormSendingComments />
-        <Map mapClassName="offer__map map" city={city} offers={offers} selectedOffers={selectedOffer} />
+        <Map mapClassName="offer__map" city={city} offers={offers} selectedOffers={selectedOffer} />
       </div>
     </div>
   );
