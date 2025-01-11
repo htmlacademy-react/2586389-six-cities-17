@@ -8,7 +8,7 @@ function SortingPlaces(): JSX.Element {
   const dispatch = useDispatch();
   const sortSpanRef = useRef<HTMLElement>(null);
   const [sortingIsOpened, setSortingIsOpened] = useState(false);
-  const currentSort = useAppSelector((state) => state.currentSort);
+  const currentSort = useAppSelector((state) => state.sort.currentSort);
 
   useEffect(() => {
     const hideSortList = (evt: MouseEvent) => {
