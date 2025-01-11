@@ -9,6 +9,8 @@ import {changeCity} from '../../../store/actions.ts';
 import SortingPlaces from '../../identical-section/sorting/sorting-places.tsx';
 import {sortOffers} from '../../../const.ts';
 import {useState} from 'react';
+import Spinner from '../../identical-section/spinner/spinner.tsx';
+//import ErrorMessage from '../../identical-section/error-message/error-message.tsx';
 
 export interface MainProps {
   city: City[];
@@ -16,9 +18,11 @@ export interface MainProps {
 
 function Main({ city }: MainProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const offerCard = useAppSelector((state) => state.offerCard);
-  const selectedCity = useAppSelector((state) => state.currentCity);
-  const currentSort = useAppSelector((state) => state.currentSort);
+  const offerCard = useAppSelector((state) => state.offers.offers);
+  const selectedCity = useAppSelector((state) => state.city.currentCity);
+  const currentSort = useAppSelector((state) => state.sort.currentSort);
+  const isLoading = useAppSelector((state) => state.offers.isLoading);
+  //const error = useAppSelector((state) => state.offers.error);
 
   const [selectedOffer, setSelectedOffer] = useState<Offers | null>(null); // Состояние для выбранной карточки
 
@@ -40,6 +44,10 @@ function Main({ city }: MainProps): JSX.Element {
       setSelectedOffer(null);
     }
   };
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <div className="page page--gray page--main">

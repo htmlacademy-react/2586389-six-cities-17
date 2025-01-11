@@ -8,12 +8,14 @@ import { offerExtended } from './mocks/offer-extended';
 import { cities} from './mocks/city.ts';
 import {store} from './store';
 import {loadOffers} from './store/actions.ts';
+import {fetchOffers} from './store/api-actions.ts';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
 store.dispatch(loadOffers(offers));
+store.dispatch(fetchOffers());
 
 root.render(
   <React.StrictMode>
