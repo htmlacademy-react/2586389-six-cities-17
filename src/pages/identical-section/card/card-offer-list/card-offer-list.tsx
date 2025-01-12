@@ -9,6 +9,7 @@ interface CardOfferListProps {
   listClassName?: string;
   cardClassName?: string;
   imageWrapperClassName?: string;
+  onCardHover?: (offerId: string | null) => void;
 }
 
 function CardOfferList(
@@ -17,6 +18,7 @@ function CardOfferList(
     cardClassName,
     listClassName,
     imageWrapperClassName,
+    onCardHover
   }: CardOfferListProps):JSX.Element {
   const [activeOfferCardId, setActiveOfferCardId] = useState('');
 
@@ -25,12 +27,18 @@ function CardOfferList(
 
   const offerCardMouseEnterHandler = (id: string): void => {
     setActiveOfferCardId(id);
+    if (onCardHover) {
+      onCardHover(id);
+    }
   };
   const offerCardMouseLeaveHandler = (): void => {
     setActiveOfferCardId('');
+    if (onCardHover) {
+      onCardHover(null);
+    }
   };
   return (
-    <div className={`places-list ${listClassName}`}>
+    <div className={`${cardType}__places-list places-list ${listClassName}`}>
       {offers.map((offer) => (
         <CardOffer
           key={offer.id}

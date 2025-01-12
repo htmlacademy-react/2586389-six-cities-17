@@ -1,12 +1,14 @@
 import { Helmet } from 'react-helmet-async';
 import Header from '../../identical-section/header/header';
 import Locations from '../../identical-section/locations/locations';
-import CitiesPlaces from '../../identical-section/cities-places/cities-places';
-import { City } from '../../../types/types';
+import {City, Offers} from '../../../types/types';
 import CardOfferList from '../../identical-section/card/card-offer-list/card-offer-list.tsx';
 import Map from '../../identical-section/map/map';
 import { useAppSelector, useAppDispatch} from '../../../components/hooks';
 import {changeCity} from '../../../store/actions.ts';
+import SortingPlaces from '../../identical-section/sorting/sorting-places.tsx';
+import {sortOffers} from '../../../const.ts';
+import {useState} from 'react';
 
 export interface MainProps {
   city: City[];
@@ -16,14 +18,28 @@ function Main({ city }: MainProps): JSX.Element {
   const dispatch = useAppDispatch();
   const offerCard = useAppSelector((state) => state.offerCard);
   const selectedCity = useAppSelector((state) => state.currentCity);
+  const currentSort = useAppSelector((state) => state.currentSort);
+
+  const [selectedOffer, setSelectedOffer] = useState<Offers | null>(null); // Состояние для выбранной карточки
+
+  const filteredOffers = selectedCity
+    ? offerCard.filter((offer) => offer.city.name === selectedCity)
+    : offerCard;
+
+  const sortedOfferCards = sortOffers(filteredOffers, currentSort);
 
   const handleOfferItemHover = (cityName: string) => {
     dispatch(changeCity(cityName));
   };
 
-  const filteredOffers = selectedCity
-    ? offerCard.filter((offer) => offer.city.name === selectedCity)
-    : offerCard;
+  const handleCardHover = (offerId: string | null) => {
+    if (offerId) {
+      const selected = filteredOffers.find((offer) => offer.id === offerId) || null;
+      setSelectedOffer(selected);
+    } else {
+      setSelectedOffer(null);
+    }
+  };
 
   return (
     <div className="page page--gray page--main">
@@ -37,10 +53,24 @@ function Main({ city }: MainProps): JSX.Element {
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
-              <CitiesPlaces offers={filteredOffers} selectedCity={selectedCity}/>
-              <CardOfferList offers={filteredOffers} />
+              <h2 className="visually-hidden">Places</h2>
+              <b className="places__found">{filteredOffers.length} places to stay in {selectedCity}</b>
+              <SortingPlaces/>
+              <CardOfferList
+                offers={sortedOfferCards} // Передаём весь массив предложений
+                cardType="cities"
+                onCardHover={handleCardHover}
+                listClassName="tabs__content"
+              />
             </section>
-            <Map city={city.find((c) => c.name === selectedCity) || city[0]} offers={filteredOffers} selectedOffers={null} />
+            <div className="cities__right-section">
+              <Map
+                city={city.find((c) => c.name === selectedCity) || city[0]}
+                offers={filteredOffers}
+                selectedOffers={selectedOffer}
+                mapClassName="cities__map"
+              />
+            </div>
           </div>
         </div>
       </main>
