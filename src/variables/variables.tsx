@@ -16,4 +16,7 @@ export const MarkerInfo = {
   Top: 40
 } as const;
 
+export const BackendUrl = 'https://16.design.htmlacademy.pro/spec/six-cities';
+export const RequestTimeout = 5000;
+
 export type SortType = typeof SortTypeList[keyof typeof SortTypeList]
