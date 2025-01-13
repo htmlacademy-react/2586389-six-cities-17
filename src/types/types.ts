@@ -1,3 +1,5 @@
+import {AuthorizationStatus} from '../const.ts';
+
 export interface OfferIrregular {
     id: string;
     title: string;
@@ -44,7 +46,6 @@ export interface Reviews {
     user: User;
 }
 
-
 export interface SettingsType {
     [key: string]: {
       width: number;
@@ -68,3 +69,37 @@ export interface FormSendingCommentsProps {
 }
 
 export type Ratings = readonly [number, string][];
+
+export interface AuthResponse {
+  email: string;
+  avatarUrl: string;
+}
+
+export interface AuthProcess {
+  status: AuthorizationStatus;
+  isErrorInAuthRequest: boolean;
+  isErrorInCheckAuthRequest: boolean;
+  userInfo: UserData | null;
+}
+
+export interface UserData extends User {
+  email: string;
+  token: string;
+  offerId: string;
+  status: number;
+}
+
+export interface AuthData {
+  login: string;
+  password: string;
+}
+
+export interface ErrorMesageType {
+  type: string;
+  message: string;
+}
+
+export interface AuthResponse {
+  email: string;
+  avatarUrl: string;
+}

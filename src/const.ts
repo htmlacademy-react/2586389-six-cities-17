@@ -10,13 +10,33 @@ export enum AppRoute {
 }
 
 export enum APIRoute {
-  OffersApi = '/offers'
+  OffersApi = '/offers',
+  LoginApi = '/login',
+  LogoutApi = '/logout',
 }
 
 export enum AuthorizationStatus {
     Auth = 'AUTH',
     NoAuth = 'NO_AUTH',
     Unknown = 'UNKNOWN',
+}
+
+export enum LoginStatus {
+  Unknown = 'unknown',
+  Processing = 'processing',
+  LoggedIn = 'logged-in',
+  Error = 'error',
+}
+
+export enum NameSpace {
+  Auth = 'auth',
+  City = 'city',
+  OffersSpace = 'offers',
+  Offer = 'offer',
+  NearPlaces = 'near_places',
+  Reviews = 'reviews',
+  FavoriteOffers = 'favorite_offers',
+  Sort = 'sort',
 }
 
 const compareOffersPriceLow = (a:Offers, b: Offers) => a.price - b.price;
