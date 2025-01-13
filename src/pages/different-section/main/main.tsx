@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import Header from '../../identical-section/header/header';
+//import Header from '../../identical-section/header/header';
 import Locations from '../../identical-section/locations/locations';
 import {City, Offers} from '../../../types/types';
 import CardOfferList from '../../identical-section/card/card-offer-list/card-offer-list.tsx';
@@ -10,6 +10,10 @@ import SortingPlaces from '../../identical-section/sorting/sorting-places.tsx';
 import {sortOffers} from '../../../const.ts';
 import {useState} from 'react';
 import Spinner from '../../identical-section/spinner/spinner.tsx';
+import {getAllOffers, getOffersLoadingStatus} from '../../../store/offers-slice/offers-selector.ts';
+import {getCurrentSort} from '../../../store/sort-slice/sort-selector.ts';
+import {getSelectedCity} from '../../../store/sity-slice/city-selector.ts';
+import Header from '../../identical-section/header/header.tsx';
 //import ErrorMessage from '../../identical-section/error-message/error-message.tsx';
 
 export interface MainProps {
@@ -18,11 +22,10 @@ export interface MainProps {
 
 function Main({ city }: MainProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const offerCard = useAppSelector((state) => state.offers.offers);
-  const selectedCity = useAppSelector((state) => state.city.currentCity);
-  const currentSort = useAppSelector((state) => state.sort.currentSort);
-  const isLoading = useAppSelector((state) => state.offers.isLoading);
-  //const error = useAppSelector((state) => state.offers.error);
+  const offerCard = useAppSelector(getAllOffers);
+  const selectedCity = useAppSelector(getSelectedCity);
+  const currentSort = useAppSelector(getCurrentSort);
+  const isLoading = useAppSelector(getOffersLoadingStatus);
 
   const [selectedOffer, setSelectedOffer] = useState<Offers | null>(null); // Состояние для выбранной карточки
 
