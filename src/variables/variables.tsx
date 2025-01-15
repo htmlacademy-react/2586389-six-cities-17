@@ -1,3 +1,5 @@
+import { StatusCodes } from 'http-status-codes';
+
 export const SortTypeList = {
   popular: 'Popular',
   priceLow: 'Price: low to high',
@@ -16,7 +18,13 @@ export const MarkerInfo = {
   Top: 40
 } as const;
 
-export const BackendUrl = 'https://16.design.htmlacademy.pro/spec/six-cities';
+export const StatusCodeMapping: Record<number, boolean> = {
+  [StatusCodes.BAD_REQUEST]: true,
+  [StatusCodes.UNAUTHORIZED]: false,
+  [StatusCodes.NOT_FOUND]: true,
+};
+
+export const BackendUrl = 'https://16.design.htmlacademy.pro/six-cities';
 export const RequestTimeout = 5000;
 
 export type SortType = typeof SortTypeList[keyof typeof SortTypeList]

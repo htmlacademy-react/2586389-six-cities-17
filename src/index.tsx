@@ -8,7 +8,8 @@ import { offerExtended } from './mocks/offer-extended';
 import { cities} from './mocks/city.ts';
 import {store} from './store';
 import {loadOffers} from './store/actions.ts';
-import {fetchOffers} from './store/api-actions.ts';
+import {checkAuthStatus, fetchOffers} from './store/api-actions.ts';
+import {BrowserRouter} from 'react-router-dom';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -16,11 +17,14 @@ const root = ReactDOM.createRoot(
 
 store.dispatch(loadOffers(offers));
 store.dispatch(fetchOffers());
+store.dispatch(checkAuthStatus());
 
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App offers = {offers} offerExtended = {offerExtended} reviews = {reviews} cities={cities}/>
+      <BrowserRouter>
+        <App offers = {offers} offerExtended = {offerExtended} reviews = {reviews} cities={cities}/>
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>
 );
