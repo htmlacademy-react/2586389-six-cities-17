@@ -29,31 +29,34 @@ function Map({city, offers, selectedOffers, mapClassName = ''}: MapProps): JSX.E
   const map = UseMap(mapRef, city);
 
   useEffect(() => {
-    if (map) {
+    if (map && city && offers.length > 0) {
       const markersLayer = layerGroup().addTo(map);
       offers.forEach((offer) => {
-        // Создаем маркер
-        const markerMap = new Marker([
-          offer.location.latitude,
-          offer.location.longitude
-        ]);
+        if (offer.location) {
+          const markerMap = new Marker([
+            offer.location.latitude,
+            offer.location.longitude,
+          ]);
 
-        // Устанавливаем иконку в зависимости от условий
-        markerMap.setIcon(
-          selectedOffers && offer.id === selectedOffers.id
-            ? currentMapIcon
-            : defaultMapIcon
-        );
+          markerMap.setIcon(
+            selectedOffers && offer.id === selectedOffers.id
+              ? currentMapIcon
+              : defaultMapIcon
+          );
 
-        // Добавляем маркер в групповую карту и затем на карту
-        markerMap.addTo(markersLayer);
+          markerMap.addTo(markersLayer);
+        }
       });
 
       return () => {
-        markersLayer.clearLayers(); // Очищаем группу маркеров при изменении данных
+        markersLayer.clearLayers();
       };
     }
-  }, [map, offers, selectedOffers]);
+  }, [map, city, offers, selectedOffers]);
+
+  if (!city || !offers || offers.length === 0) {
+    return <div>Map data is not available</div>;
+  }
 
   return (
     <section className={`${mapClassName} map`} ref={mapRef}>

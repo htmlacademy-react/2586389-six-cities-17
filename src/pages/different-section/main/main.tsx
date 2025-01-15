@@ -7,7 +7,7 @@ import Map from '../../identical-section/map/map';
 import { useAppSelector, useAppDispatch} from '../../../components/hooks';
 import {changeCity} from '../../../store/actions.ts';
 import SortingPlaces from '../../identical-section/sorting/sorting-places.tsx';
-import {sortOffers} from '../../../const.ts';
+import {sortOffers} from '../../../utils/utlis.ts';
 import {useState} from 'react';
 import Spinner from '../../identical-section/spinner/spinner.tsx';
 import {getAllOffers, getOffersLoadingStatus} from '../../../store/offers-slice/offers-selector.ts';

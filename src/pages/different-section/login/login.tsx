@@ -17,7 +17,7 @@ function Login (): JSX.Element {
 
   const handleSubmitLoginForm = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    if (loginRef.current !== null && passwordRef.current !== null) {
+    if (loginRef.current && passwordRef.current) {
       dispatch(loginAction({
         login: loginRef.current.value,
         password: passwordRef.current.value

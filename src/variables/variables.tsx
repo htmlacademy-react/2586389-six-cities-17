@@ -1,4 +1,5 @@
 import { StatusCodes } from 'http-status-codes';
+import {Offers} from '../types/types.ts';
 
 export const SortTypeList = {
   popular: 'Popular',
@@ -9,6 +10,8 @@ export const SortTypeList = {
 export const MinLengthOfReview = 50;
 export const MaxLengthOfReview = 300;
 
+export const NearPlacesOffersAmount = 3;
+
 export const MarkerInfo = {
   UrlDef: 'img/pin.svg',
   UrlAct: 'img/pin-active.svg',
@@ -17,6 +20,30 @@ export const MarkerInfo = {
   Left: 14,
   Top: 40
 } as const;
+
+
+export const RatingsStars = [
+  {
+    value: 5,
+    title: 'perfect',
+  },
+  {
+    value: 4,
+    title: 'good',
+  },
+  {
+    value: 3,
+    title: 'not bad',
+  },
+  {
+    value: 2,
+    title: 'badly'
+  },
+  {
+    value: 1,
+    title: 'terribly'
+  }
+];
 
 export const StatusCodeMapping: Record<number, boolean> = {
   [StatusCodes.BAD_REQUEST]: true,
@@ -28,3 +55,6 @@ export const BackendUrl = 'https://16.design.htmlacademy.pro/six-cities';
 export const RequestTimeout = 5000;
 
 export type SortType = typeof SortTypeList[keyof typeof SortTypeList]
+
+export const UpdateFavoriteStatus = (offers: Offers[], payload: Offers, isFavorite: boolean) =>
+  offers.map((offer) => offer.id === payload.id ? { ...offer, isFavorite } : offer);

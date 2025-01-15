@@ -1,6 +1,3 @@
-import {Offers} from './types/types.ts';
-import {SortTypeList, SortType} from './variables/variables.tsx';
-
 export enum AppRoute {
     Main = '/',
     Favorites = '/favorites',
@@ -13,6 +10,11 @@ export enum APIRoute {
   OffersApi = '/offers',
   LoginApi = '/login',
   LogoutApi = '/logout',
+  OfferApi = '/offer',
+  ReviewsApi = '/reviews',
+  FavoritesApi = '/favorites',
+  NearPlacesApi = '/nearPlaces',
+  CommentsApi = '/comments',
 }
 
 export enum AuthorizationStatus {
@@ -21,10 +23,17 @@ export enum AuthorizationStatus {
     Unknown = 'UNKNOWN',
 }
 
-export enum LoginStatus {
+export enum DataStatus {
   Unknown = 'unknown',
-  Processing = 'processing',
-  LoggedIn = 'logged-in',
+  Loading = 'loading',
+  Loaded = 'loaded',
+  Error = 'error',
+}
+
+export enum PostingStatus {
+  Unknown = 'unknown',
+  Posting = 'posting',
+  Posted = 'posted',
   Error = 'error',
 }
 
@@ -33,28 +42,10 @@ export enum NameSpace {
   City = 'city',
   OffersSpace = 'offers',
   Offer = 'offer',
-  NearPlaces = 'near_places',
+  NearPlaces = 'nearPlaces',
   Reviews = 'reviews',
   FavoriteOffers = 'favorite_offers',
   Sort = 'sort',
 }
 
-const compareOffersPriceLow = (a:Offers, b: Offers) => a.price - b.price;
-const compareOffersPriceHigh = (a:Offers, b: Offers) => b.price - a.price;
-const compareOffersTopRated = (a:Offers, b: Offers) => b.rating - a.rating;
 
-export const sortOffers = (offers: Offers[], sortingType: SortType): Offers[] => {
-  switch (sortingType) {
-    case SortTypeList.popular:
-      return offers;
-    case SortTypeList.priceLow:
-      return [...offers].sort(compareOffersPriceLow);
-    case SortTypeList.priceHigh:
-      return [...offers].sort(compareOffersPriceHigh);
-    case SortTypeList.topRated:
-      return [...offers].sort(compareOffersTopRated);
-
-    default:
-      return offers;
-  }
-};

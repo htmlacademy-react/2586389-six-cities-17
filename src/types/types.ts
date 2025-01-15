@@ -1,4 +1,4 @@
-import {AuthorizationStatus} from '../const.ts';
+import {AuthorizationStatus, DataStatus, PostingStatus} from '../const.ts';
 
 export interface OfferIrregular {
     id: string;
@@ -38,12 +38,25 @@ export interface OfferExtended extends Offers {
     maxAdults: number;
 }
 
+export interface OfferProcess {
+  data: null | OfferExtended;
+  status: DataStatus;
+  isOfferDataLoading: boolean;
+  isErrorInOfferDataLoading: boolean;
+}
+
 export interface Reviews {
     id?: string;
     comment: string;
     date: string;
     rating: number;
     user: User;
+}
+
+export interface ReviewsData {
+  offerId: string;
+  comment: string;
+  rating: number;
 }
 
 export interface SettingsType {
@@ -70,11 +83,6 @@ export interface FormSendingCommentsProps {
 
 export type Ratings = readonly [number, string][];
 
-export interface AuthResponse {
-  email: string;
-  avatarUrl: string;
-}
-
 export interface AuthProcess {
   status: AuthorizationStatus;
   isErrorInAuthRequest: boolean;
@@ -99,7 +107,15 @@ export interface ErrorMesageType {
   message: string;
 }
 
-export interface AuthResponse {
-  email: string;
-  avatarUrl: string;
+export interface ReviewsProcess {
+  data: Reviews[];
+  status: DataStatus;
+  posingStatus: PostingStatus;
 }
+
+export interface NearPlacesProcess {
+  data: Offers[];
+  status: DataStatus;
+}
+
+
