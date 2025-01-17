@@ -20,7 +20,7 @@ function ReviewsOffer({reviews}: ReviewsOfferProps):JSX.Element {
               alt="Reviews avatar"
             />
           </div>
-          <span className="reviews__user-name">Max</span>
+          <span className="reviews__user-name">{user.name}</span>
         </div>
         <div className="reviews__info">
           <div className="reviews__rating rating">

@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
 import {Provider} from 'react-redux';
 import { offers } from './mocks/offers';
-import { reviews } from './mocks/reviews';
-import { offerExtended } from './mocks/offer-extended';
 import { cities} from './mocks/city.ts';
 import {store} from './store';
 import {loadOffers} from './store/actions.ts';
@@ -23,7 +21,7 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <App offers = {offers} offerExtended = {offerExtended} reviews = {reviews} cities={cities}/>
+        <App offers = {offers} cities={cities}/>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>

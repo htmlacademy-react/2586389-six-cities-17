@@ -1,15 +1,12 @@
-import {Offers} from '../../../types/types.ts';
-
 interface PremiumProps {
-  offers: Offers[];
+  isPremium: boolean;
 }
 
-function Premium ({offers}: PremiumProps): JSX.Element {
-  const hasPremiumOffers = offers.some((offer) => offer.isPremium);
+function Premium ({isPremium}: PremiumProps): JSX.Element {
 
   return (
     <div>
-      {hasPremiumOffers && (
+      {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
         </div>

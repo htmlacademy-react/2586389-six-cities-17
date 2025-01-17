@@ -1,12 +1,11 @@
-import {ChangeEvent} from 'react';
-
 interface FormSendingRatingsProps {
   value: number;
   title: string;
-  handleValueChange: (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onRatingButtonChange: (value: number) => void;
+  checked: boolean;
 }
 
-function FormSendingRatings ({value, title, handleValueChange}: FormSendingRatingsProps):JSX.Element {
+function FormSendingRatings ({value, title, onRatingButtonChange, checked}: FormSendingRatingsProps):JSX.Element {
   return (
     <>
       <input
@@ -15,7 +14,10 @@ function FormSendingRatings ({value, title, handleValueChange}: FormSendingRatin
         value={value}
         id={`${value}-stars`}
         type="radio"
-        onChange={handleValueChange}
+        checked={checked}
+        onChange={(e) => {
+          onRatingButtonChange(Number(e.target.value));
+        }}
       />
       <label
         htmlFor={`${value}-stars`}

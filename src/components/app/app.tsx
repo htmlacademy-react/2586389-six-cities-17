@@ -7,7 +7,7 @@ import Offer from '../../pages/different-section/offer/offer';
 import NotFound from '../../pages/different-section/not-found/not-found';
 import Login from '../../pages/different-section/login/login';
 import PrivateRoute from '../private-route/private-route';
-import {City, OfferExtended, Offers, Reviews} from '../../types/types.ts';
+import {City, Offers} from '../../types/types.ts';
 import {useAppSelector} from '../hooks';
 import Spinner from '../../pages/identical-section/spinner/spinner.tsx';
 import {getOffersLoadingStatus} from '../../store/offers-slice/offers-selector.ts';
@@ -16,11 +16,9 @@ import {getAuthStatus} from '../../store/auth-slice/auth-selector.ts';
 export interface AppProps {
   cities: City[];
   offers: Offers[];
-  reviews: Reviews[];
-  offerExtended: OfferExtended;
 }
 
-function App({cities, offers, reviews, offerExtended}: AppProps): JSX.Element {
+function App({cities, offers}: AppProps): JSX.Element {
   const isLoading = useAppSelector(getOffersLoadingStatus);
   const authorizationStatus = useAppSelector(getAuthStatus);
 
@@ -41,7 +39,7 @@ function App({cities, offers, reviews, offerExtended}: AppProps): JSX.Element {
               </PrivateRoute>
             }
           />
-          <Route path={AppRoute.Offer} element={<Offer offers={offers} offerExtended={offerExtended} reviews={reviews}/>} />
+          <Route path={AppRoute.Offer} element={<Offer />} />
           <Route path={AppRoute.Login} element={<Login />} />
           <Route path={AppRoute.NotFound} element={<NotFound />} />
         </Route>

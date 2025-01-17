@@ -7,6 +7,10 @@ interface OfferHostProps {
 function OfferHost({offerExtended}: OfferHostProps): JSX.Element {
   const { host, description } = offerExtended;
 
+  if (!host) {
+    return <div>Host information is not available</div>; // Заглушка, если host отсутствует
+  }
+
   return (
     <div className="offer__host">
       <h2 className="offer__host-title">Meet the host</h2>

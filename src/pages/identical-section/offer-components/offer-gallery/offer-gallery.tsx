@@ -1,17 +1,15 @@
-import {OfferExtended} from '../../../../types/types.ts';
-
 interface OfferGalleryProps {
-  offerExtended: OfferExtended;
+  images: string[];
 }
 
-function OfferGallery({offerExtended}: OfferGalleryProps): JSX.Element {
-  const {images, id} = offerExtended;
+function OfferGallery(offerGalleryProps: OfferGalleryProps): JSX.Element {
+  const {images} = offerGalleryProps;
 
   return(
     <div className="offer__gallery-container container">
       <div className="offer__gallery">
         {images.map((image) => (
-          <div className="offer__image-wrapper" key={id}>
+          <div className="offer__image-wrapper" key={image}>
             <img
               className="offer__image"
               src={image}

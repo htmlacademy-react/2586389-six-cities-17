@@ -2,40 +2,40 @@ import Bookmark from '../../bookmark/bookmark';
 import Premium from '../../premium/premium';
 import Rating from '../../rating/rating';
 import OfferHost from '../offer-host/offer-host';
-import {Offers, Reviews, City, OfferExtended} from '../../../../types/types.ts';
+import {Reviews, City, OfferExtended, Offers} from '../../../../types/types.ts';
 import FormSendingComments from '../../../../components/form-sending-comments/form-sending-comments.tsx';
 import ReviewsOfferList from '../../reviews/reviews-offer-list.tsx';
 import Map from '../../map/map.tsx';
 
 interface OfferWraperProps {
-  offers: Offers[];
   reviews: Reviews[];
+  offer: OfferExtended;
+  nearPlaces: Offers[];
   city: City;
-  selectedOffer: Offers | null;
-  offerExtended: OfferExtended;
+  selectedOffer: OfferExtended | null;
 }
 
-function OfferWrapper ({offers, reviews, city, selectedOffer, offerExtended}: OfferWraperProps): JSX.Element {
-  const { title, type, price, bedrooms, maxAdults, goods, id} = offerExtended;
+function OfferWrapper ({offer, reviews, nearPlaces, city, selectedOffer}: OfferWraperProps): JSX.Element {
+  const { id, title, type, price, rating, isPremium, bedrooms, maxAdults, goods } = offer;
 
   return(
     <div className="offer__container container">
       <div className="offer__wrapper">
-        <Premium offers={offers}/>
+        <Premium isPremium={isPremium}/>
         <div className="offer__name-wrapper">
           <h1 className="offer__name">
             {title}
           </h1>
-          <Bookmark />
+          <Bookmark isFavorite={offer.isFavorite}/>
         </div>
-        <Rating />
+        <Rating rating={rating}/>
         <ul className="offer__features">
           <li className="offer__feature offer__feature--entire">{type}</li>
           <li className="offer__feature offer__feature--bedrooms">
-            {bedrooms} Bedrooms
+            {bedrooms} Bedroom{bedrooms > 1 ? 's' : ''}
           </li>
           <li className="offer__feature offer__feature--adults">
-          Max {maxAdults} adults
+          Max {maxAdults} adult{maxAdults > 1 ? 's' : ''}
           </li>
         </ul>
         <div className="offer__price">
@@ -45,15 +45,17 @@ function OfferWrapper ({offers, reviews, city, selectedOffer, offerExtended}: Of
         <div className="offer__inside">
           <h2 className="offer__inside-title">What`&apos`s inside</h2>
           <ul className="offer__inside-list">
-            {goods.map((good) => (
+            {goods?.map((good) => ( // Используйте опциональную цепочку
               <li key={id} className="offer__inside-item">{good}</li>
             ))}
           </ul>
         </div>
-        <OfferHost offerExtended={offerExtended}/>
-        <ReviewsOfferList reviews={reviews} />
+        <OfferHost offerExtended={offer || { host: { avatarUrl: '', name: '', isPro: false }, description: '' }} />
+        <ReviewsOfferList reviews={reviews}/>
         <FormSendingComments />
-        <Map mapClassName="offer__map" city={city} offers={offers} selectedOffers={selectedOffer} />
+        {/* Посмотрите, пожалуйста, почему карта не растягивается на всю ширину экрана, как должна? Я проверяла классы,
+        они правильные, вроде, но может где-то пропустила что-то */}
+        <Map mapClassName="offer__map" city={city} offers={nearPlaces} selectedOffers={selectedOffer} />
       </div>
     </div>
   );
