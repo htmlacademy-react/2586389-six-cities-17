@@ -1,31 +1,26 @@
 import { Helmet } from 'react-helmet-async';
-//import Header from '../../identical-section/header/header';
 import Locations from '../../identical-section/locations/locations';
-import {City, Offers} from '../../../types/types';
+import {Offers} from '../../../types/types';
+import {Cities} from '../../../variables/variables.tsx';
 import CardOfferList from '../../identical-section/card/card-offer-list/card-offer-list.tsx';
 import Map from '../../identical-section/map/map';
 import { useAppSelector, useAppDispatch} from '../../../components/hooks';
-import {changeCity} from '../../../store/actions.ts';
+import {changeCity} from '../../../store/offers-slice/offers-slice.ts';
 import SortingPlaces from '../../identical-section/sorting/sorting-places.tsx';
 import {sortOffers} from '../../../utils/utlis.ts';
 import {useState} from 'react';
-import Spinner from '../../identical-section/spinner/spinner.tsx';
-import {getAllOffers, getOffersLoadingStatus} from '../../../store/offers-slice/offers-selector.ts';
-import {getCurrentSort} from '../../../store/sort-slice/sort-selector.ts';
-import {getSelectedCity} from '../../../store/sity-slice/city-selector.ts';
+import {getAllOffers, getSortedOffers} from '../../../store/offers-slice/offers-selector.ts';
+import {getSortingType} from '../../../store/offers-slice/offers-selector.ts';
+import {getSelectedCity} from '../../../store/offers-slice/offers-selector.ts';
 import Header from '../../identical-section/header/header.tsx';
-//import ErrorMessage from '../../identical-section/error-message/error-message.tsx';
+import MainEmpty from '../main-empty/main-empty.tsx';
 
-export interface MainProps {
-  city: City[];
-}
-
-function Main({ city }: MainProps): JSX.Element {
+function Main(): JSX.Element {
   const dispatch = useAppDispatch();
   const offerCard = useAppSelector(getAllOffers);
   const selectedCity = useAppSelector(getSelectedCity);
-  const currentSort = useAppSelector(getCurrentSort);
-  const isLoading = useAppSelector(getOffersLoadingStatus);
+  const currentSort = useAppSelector(getSortingType);
+  const sortedOffers = useAppSelector(getSortedOffers);
 
   const [selectedOffer, setSelectedOffer] = useState<Offers | null>(null); // Состояние для выбранной карточки
 
@@ -48,9 +43,6 @@ function Main({ city }: MainProps): JSX.Element {
     }
   };
 
-  if (isLoading) {
-    return <Spinner />;
-  }
 
   return (
     <div className="page page--gray page--main">
@@ -60,30 +52,38 @@ function Main({ city }: MainProps): JSX.Element {
       <Header />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-        <Locations cities={city} onListOfferHover={handleOfferItemHover} selectedCity={selectedCity}/>
-        <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{filteredOffers.length} places to stay in {selectedCity}</b>
-              <SortingPlaces/>
-              <CardOfferList
-                offers={sortedOfferCards} // Передаём весь массив предложений
-                cardType="cities"
-                onCardHover={handleCardHover}
-                listClassName="tabs__content"
-              />
-            </section>
-            <div className="cities__right-section">
-              <Map
-                city={city.find((c) => c.name === selectedCity) || city[0]}
-                offers={filteredOffers}
-                selectedOffers={selectedOffer}
-                mapClassName="cities__map"
-              />
+        <Locations cities={Cities} onListOfferHover={handleOfferItemHover} selectedCity={selectedCity}/>
+
+        {sortedOffers.length !== 0 ? (
+          <div className="cities">
+            <div className="cities__places-container container">
+              <section className="cities__places places">
+                <h2 className="visually-hidden">Places</h2>
+                <b className="places__found">
+                  {filteredOffers.length} places to stay in {selectedCity}
+                </b>
+                <SortingPlaces />
+                <CardOfferList
+                  offers={sortedOfferCards}
+                  cardType="cities"
+                  onCardHover={handleCardHover}
+                  listClassName="tabs__content"
+                />
+              </section>
+              <div className="cities__right-section">
+                <Map
+                  city={Cities.find((c) => c.name === selectedCity) || Cities[0]}
+                  offers={filteredOffers}
+                  selectedOffers={selectedOffer}
+                  mapClassName="cities__map"
+                />
+              </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <MainEmpty />
+        )}
+
       </main>
     </div>
   );

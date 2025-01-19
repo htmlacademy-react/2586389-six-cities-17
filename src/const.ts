@@ -10,10 +10,7 @@ export enum APIRoute {
   OffersApi = '/offers',
   LoginApi = '/login',
   LogoutApi = '/logout',
-  OfferApi = '/offer',
-  ReviewsApi = '/reviews',
-  FavoritesApi = '/favorites',
-  NearPlacesApi = '/nearPlaces',
+  FavoritesApi = '/favorite',
   CommentsApi = '/comments',
 }
 
@@ -39,13 +36,16 @@ export enum PostingStatus {
 
 export enum NameSpace {
   Auth = 'auth',
-  City = 'city',
   OffersSpace = 'offers',
   Offer = 'offer',
   NearPlaces = 'nearPlaces',
   Reviews = 'reviews',
-  FavoriteOffers = 'favorite_offers',
-  Sort = 'sort',
+  Favorite = 'favorite',
+}
+
+export enum BookmarkStatus {
+  Offer = 'offer',
+  PlacesCard = 'place-card',
 }
 
 

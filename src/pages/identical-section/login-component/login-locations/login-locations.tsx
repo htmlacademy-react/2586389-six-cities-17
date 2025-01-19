@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import {memo} from 'react';
 
 function LoginLocation (): JSX.Element {
   return(
@@ -12,4 +13,4 @@ function LoginLocation (): JSX.Element {
   );
 }
 
-export default LoginLocation;
+export default memo(LoginLocation);

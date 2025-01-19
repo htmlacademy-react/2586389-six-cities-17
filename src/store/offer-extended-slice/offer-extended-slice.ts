@@ -1,7 +1,6 @@
-//import {OfferProcess, ReviewsProcess} from '../../types/types.ts';
 import {DataStatus, NameSpace} from '../../const.ts';
 import {createSlice} from '@reduxjs/toolkit';
-import { getOfferInfoById, logoutAction} from '../api-actions.ts';
+import {addToFavoriteOffer, getOfferInfoById, logoutAction, removeToFavoriteOffer} from '../api-actions.ts';
 import { OfferProcess} from '../../types/types.ts';
 
 const initialState: OfferProcess = {
@@ -33,6 +32,18 @@ const offerSlice = createSlice({
         state.status = DataStatus.Error;
         state.isOfferDataLoading = false;
         state.isErrorInOfferDataLoading = true;
+      })
+      // @-- add favorite --@ \\
+      .addCase(addToFavoriteOffer.fulfilled, (state) => {
+        if(state.data) {
+          state.data.isFavorite = true;
+        }
+      })
+      // @-- remove favorite --@ \\
+      .addCase(removeToFavoriteOffer.fulfilled, (state) => {
+        if(state.data) {
+          state.data.isFavorite = false;
+        }
       })
       // @-- logout --@ \\
       .addCase(logoutAction.fulfilled, (state) => {

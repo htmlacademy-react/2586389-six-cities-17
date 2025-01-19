@@ -1,3 +1,5 @@
+import {memo} from 'react';
+
 interface OfferGalleryProps {
   images: string[];
 }
@@ -22,4 +24,4 @@ function OfferGallery(offerGalleryProps: OfferGalleryProps): JSX.Element {
   );
 }
 
-export default OfferGallery;
+export default memo(OfferGallery);

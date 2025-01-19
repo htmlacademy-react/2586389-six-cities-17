@@ -16,7 +16,7 @@ function NotFound(): JSX.Element {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          minHeight: '80vh', // Занимает всю высоту экрана
+          minHeight: '80vh',
         }}
       >
         <div

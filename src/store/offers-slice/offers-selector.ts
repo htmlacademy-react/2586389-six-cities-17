@@ -1,9 +1,9 @@
-import { NameSpace } from '../../const.ts';
-import { AppState } from '../../types/state.ts';
+import {AppState} from '../../types/state.ts';
+import {NameSpace} from '../../const.ts';
 import {Offers} from '../../types/types.ts';
+import {SortType} from '../../variables/variables.tsx';
 
-export const getAllOffers = (state: AppState): Offers[] => state[NameSpace.OffersSpace].offers;
-export const getOffersLoadingStatus = (state: AppState): boolean => state[NameSpace.OffersSpace].isLoading;
-export const getOffersError = (state: AppState): string | null => state[NameSpace.OffersSpace].error;
-export const getSelectedCity = (state: AppState): string => state[NameSpace.City].currentCity;
-
+export const getAllOffers = (state: AppState) => state[NameSpace.OffersSpace].all;
+export const getSelectedCity = (state: AppState): string => state[NameSpace.OffersSpace].cityName;
+export const getSortingType = (state: AppState): SortType => state[NameSpace.OffersSpace].sortingType;
+export const getSortedOffers = (state: AppState): Offers[] => state[NameSpace.OffersSpace].sorted;

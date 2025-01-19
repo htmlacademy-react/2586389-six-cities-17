@@ -11,7 +11,7 @@ const createAppAsyncThunk = createAsyncThunk.withTypes<{
   extra: AxiosInstance;
 }>();
 
-//-- @OFFERS + --\\
+//-- @OFFERS --\\
 
 export const fetchOffers = createAppAsyncThunk<Offers[], undefined>('offers/fetchOffers',
   async (_arg, {extra: api}) => {
@@ -20,7 +20,7 @@ export const fetchOffers = createAppAsyncThunk<Offers[], undefined>('offers/fetc
   }
 );
 
-// @-- AUTHSTATUS + --@ \\
+// @-- AUTHSTATUS --@ \\
 
 export const checkAuthStatus = createAppAsyncThunk<UserData, undefined>('user/checkAuthStatus',
   async (_arg, {extra: api}) => {
@@ -29,7 +29,7 @@ export const checkAuthStatus = createAppAsyncThunk<UserData, undefined>('user/ch
   }
 );
 
-// @-- LOGIN + --@ \\
+// @-- LOGIN --@ \\
 
 export const loginAction = createAppAsyncThunk<UserData, AuthData>('user/login',
   async ({login: email, password}, {extra: api}) => {
@@ -46,7 +46,7 @@ export const logoutAction = createAppAsyncThunk<void, undefined>('user/logout',
   }
 );
 
-// @-- OFFER + --@ \\
+// @-- OFFER --@ \\
 
 export const getOfferInfoById = createAppAsyncThunk<OfferExtended, string>('offer/getOfferInfo',
   async(id, {extra: api}) => {
@@ -55,7 +55,7 @@ export const getOfferInfoById = createAppAsyncThunk<OfferExtended, string>('offe
   }
 );
 
-// @-- OFFER-nearby + --@ \\
+// @-- OFFER-nearby --@ \\
 
 export const fetchNearPlacesOffers = createAppAsyncThunk<Offers[], string>('offer/fetchNerabyOffers',
   async(id, {extra: api}) => {
@@ -64,7 +64,7 @@ export const fetchNearPlacesOffers = createAppAsyncThunk<Offers[], string>('offe
   }
 );
 
-// @-- OFFER-reviews + --@ \\
+// @-- OFFER-reviews --@ \\
 
 export const fetchOfferReview = createAppAsyncThunk<Reviews[], string>('offer/fetchOfferComments',
   async(id, {extra: api}) => {
@@ -82,6 +82,32 @@ export const postReviewToOffer = createAppAsyncThunk<Reviews, ReviewsData>(
     });
 
     dispatch(fetchOfferReview(offerId));
+    return data;
+  }
+);
+
+// @-- FAVORITE --@ \\
+
+export const getListOfFavoritesOffers = createAppAsyncThunk<Offers[], undefined>(
+  'favorites/getFavoritesOffers',
+  async (_arg, {extra: api}) => {
+    const {data} = await api.get<Offers[]>(APIRoute.FavoritesApi);
+    return data;
+  }
+);
+
+export const addToFavoriteOffer = createAppAsyncThunk<Offers, string>(
+  'favorite/addToFavorite',
+  async (offerId, {extra: api}) => {
+    const {data} = await api.post<Offers>(`${APIRoute.FavoritesApi}/${offerId}/1`);
+    return data;
+  }
+);
+
+export const removeToFavoriteOffer = createAppAsyncThunk<Offers, string>(
+  'favorite/removeToFavorite',
+  async (offerId, {extra: api}) => {
+    const {data} = await api.post<Offers>(`${APIRoute.FavoritesApi}/${offerId}/0`);
     return data;
   }
 );
