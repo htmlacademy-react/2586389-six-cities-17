@@ -20,3 +20,8 @@ export const sortOffers = (offers: Offers[], sortingType: SortType): Offers[] =>
       return offers;
   }
 };
+
+export const getOffersByCityName = (offers: Offers[], cityName: string) =>
+  offers.filter((offer) => cityName.toLowerCase() === offer.city.name.toLowerCase());
+
+export const defineCityLocation = (offers: Offers[]) => offers[0]?.city.location;

@@ -1,4 +1,5 @@
 import {OfferExtended} from '../../../../types/types.ts';
+import {memo} from 'react';
 
 interface OfferHostProps {
   offerExtended: OfferExtended;
@@ -8,7 +9,7 @@ function OfferHost({offerExtended}: OfferHostProps): JSX.Element {
   const { host, description } = offerExtended;
 
   if (!host) {
-    return <div>Host information is not available</div>; // Заглушка, если host отсутствует
+    return <div>Host information is not available</div>;
   }
 
   return (
@@ -36,4 +37,4 @@ function OfferHost({offerExtended}: OfferHostProps): JSX.Element {
   );
 }
 
-export default OfferHost;
+export default memo(OfferHost);

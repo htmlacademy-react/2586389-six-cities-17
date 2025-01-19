@@ -1,3 +1,5 @@
+import {memo} from 'react';
+
 interface RatingProps {
   rating: number;
 }
@@ -16,4 +18,4 @@ function Rating({rating}: RatingProps): JSX.Element {
   );
 }
 
-export default Rating;
+export default memo(Rating);

@@ -1,4 +1,4 @@
-import {MouseEvent} from 'react';
+import {MouseEvent, memo} from 'react';
 import {City} from '../../../types/types.ts';
 
 interface LocationProps {
@@ -34,4 +34,4 @@ function Locations ({onListOfferHover, cities, selectedCity}: LocationProps): JS
   );
 }
 
-export default Locations;
+export default memo(Locations);

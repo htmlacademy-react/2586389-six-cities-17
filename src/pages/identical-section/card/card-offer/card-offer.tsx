@@ -4,10 +4,10 @@ import { Offers } from '../../../../types/types.ts';
 import {AppRoute} from '../../../../const.ts';
 import { generatePath } from 'react-router-dom';
 import Premium from '../../premium/premium.tsx';
+import {BookmarkStatus} from '../../../../const.ts';
 
 interface CardOfferProps {
   offers: Offers;
-  offersPremium: Offers[];
   cardType: 'favorites' | 'near-places' | 'cities';
   onOfferCardMouseEnter?: () => void;
   onOfferCardMouseLeave?: () => void;
@@ -17,16 +17,14 @@ interface CardOfferProps {
 
 function CardOffer(
   {offers,
-    offersPremium,
     cardType,
     onOfferCardMouseEnter,
     onOfferCardMouseLeave,
     cardClassName = '',
     imageWrapperClassName = ''}
   : CardOfferProps): JSX.Element {
-  const { id, previewImage, price, isFavorite, rating, title, type } = offers;
+  const { id, previewImage, price, isFavorite, rating, title, type, isPremium } = offers;
 
-  // Определяем размеры изображения в зависимости от типа карточки
   const imageW = cardType === 'favorites' ? '150' : '260';
   const imageH = cardType === 'favorites' ? '110' : '200';
 
@@ -36,7 +34,7 @@ function CardOffer(
       onMouseEnter={onOfferCardMouseEnter}
       onMouseLeave={onOfferCardMouseLeave}
     >
-      <Premium offers={offersPremium}/>
+      <Premium isPremium={isPremium}/>
       <div className={`${cardType}__image-wrapper place-card__image-wrapper ${imageWrapperClassName}`}>
         <Link to={generatePath(AppRoute.Offer, {id})}>
           <img
@@ -54,16 +52,16 @@ function CardOffer(
             <b className="place-card__price-value">€{price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <Bookmark isFavorite={isFavorite} />
+          <Bookmark isFavorite={isFavorite} offerId={id} bookmarkButton={BookmarkStatus.PlacesCard}/>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: '80%' }} />
+            <span style={{width: '80%'}}/>
             <span className="visually-hidden">{rating}</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={generatePath(AppRoute.Offer, {id})}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

@@ -1,6 +1,5 @@
 import {Helmet} from 'react-helmet-async';
 import Header from '../../identical-section/header/header';
-import OfferGallery from '../../identical-section/offer-components/offer-gallery/offer-gallery';
 import OfferWrapper from '../../identical-section/offer-components/offer-wrapper/offer-wrapper';
 import CardOfferList from '../../identical-section/card/card-offer-list/card-offer-list.tsx';
 import {useAppDispatch, useAppSelector} from '../../../components/hooks';
@@ -48,15 +47,12 @@ function Offer (): JSX.Element {
       </Helmet>
       <Header />
       <main className="page__main page__main--offer">
-        <section className="offer">
-          <OfferGallery images={offerData.images || []} />
-          <OfferWrapper
-            offer={offerData || { goods: [] }}
-            reviews={reviews} nearPlaces={nearPlaces}
-            city={offerData.city}
-            selectedOffer={offerData}
-          />
-        </section>
+        <OfferWrapper
+          offer={offerData || { goods: [] }}
+          reviews={reviews} nearPlaces={nearPlaces}
+          city={offerData.city}
+          selectedOffer={offerData}
+        />
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">

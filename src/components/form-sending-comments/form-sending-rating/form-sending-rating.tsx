@@ -1,3 +1,5 @@
+import {memo} from 'react';
+
 interface FormSendingRatingsProps {
   value: number;
   title: string;
@@ -32,4 +34,4 @@ function FormSendingRatings ({value, title, onRatingButtonChange, checked}: Form
   );
 }
 
-export default FormSendingRatings;
+export default memo(FormSendingRatings);

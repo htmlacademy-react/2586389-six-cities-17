@@ -1,4 +1,4 @@
-import {ChangeEvent, useState} from 'react';
+import {ChangeEvent, useState, memo} from 'react';
 import FormSendingRatings from './form-sending-rating/form-sending-rating.tsx';
 import {MaxLengthOfReview, MinLengthOfReview, RatingsStars} from '../../variables/variables.tsx';
 import {useAppDispatch, useAppSelector} from '../hooks';
@@ -118,4 +118,4 @@ function FormSendingComments():JSX.Element {
   );
 }
 
-export default FormSendingComments;
+export default memo(FormSendingComments);

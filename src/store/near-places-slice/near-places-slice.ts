@@ -1,7 +1,8 @@
 import {NearPlacesProcess} from '../../types/types.ts';
 import {DataStatus, NameSpace} from '../../const.ts';
 import {createSlice} from '@reduxjs/toolkit';
-import {fetchNearPlacesOffers, logoutAction} from '../api-actions.ts';
+import {addToFavoriteOffer, fetchNearPlacesOffers, logoutAction, removeToFavoriteOffer} from '../api-actions.ts';
+import {UpdateFavoriteStatus} from '../../variables/variables.tsx';
 
 const initialState: NearPlacesProcess = {
   data: [],
@@ -24,6 +25,12 @@ export const nearPlacesSlice = createSlice({
       })
       .addCase(fetchNearPlacesOffers.rejected, (state) => {
         state.status = DataStatus.Error;
+      })
+      .addCase(addToFavoriteOffer.fulfilled, (state, action) => {
+        state.data = UpdateFavoriteStatus(state.data, action.payload, true);
+      })
+      .addCase(removeToFavoriteOffer.fulfilled, (state, action) => {
+        state.data = UpdateFavoriteStatus(state.data, action.payload, false);
       })
       .addCase(logoutAction.fulfilled, (state) => {
         state.data = state.data.map((offer) => ({ ...offer, isFavorite: false }));

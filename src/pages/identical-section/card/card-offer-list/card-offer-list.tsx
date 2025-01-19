@@ -20,10 +20,8 @@ function CardOfferList(
     imageWrapperClassName,
     onCardHover
   }: CardOfferListProps):JSX.Element {
-  const [activeOfferCardId, setActiveOfferCardId] = useState('');
+  const [, setActiveOfferCardId] = useState('');
 
-  // eslint-disable-next-line no-console
-  console.log(activeOfferCardId);
 
   const offerCardMouseEnterHandler = (id: string): void => {
     setActiveOfferCardId(id);
@@ -43,7 +41,6 @@ function CardOfferList(
         <CardOffer
           key={offer.id}
           offers={offer}
-          offersPremium={offers}
           cardType={cardType}
           cardClassName={cardClassName}
           imageWrapperClassName={imageWrapperClassName}

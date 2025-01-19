@@ -1,4 +1,5 @@
 import {AuthorizationStatus, DataStatus, PostingStatus} from '../const.ts';
+import {SortType} from '../variables/variables.tsx';
 
 export interface OfferIrregular {
     id: string;
@@ -59,29 +60,11 @@ export interface ReviewsData {
   rating: number;
 }
 
-export interface SettingsType {
-    [key: string]: {
-      width: number;
-      height: number;
-    };
-}
-
 export interface User {
     name: string;
     avatarUrl: string;
     isPro: boolean;
 }
-
-export interface IsFavorite {
-  isFavorite: boolean;
-}
-
-export interface FormSendingCommentsProps {
-  rating: number;
-  review: string;
-}
-
-export type Ratings = readonly [number, string][];
 
 export interface AuthProcess {
   status: AuthorizationStatus;
@@ -118,4 +101,17 @@ export interface NearPlacesProcess {
   status: DataStatus;
 }
 
+export interface FavoriteOffersProcess {
+  data: Offers[];
+  status: DataStatus;
+}
+
+export interface OffersProcess {
+  cityName: string;
+  cityLocation: Location;
+  all: Offers[];
+  sorted: Offers[];
+  sortingType: SortType;
+  status: DataStatus;
+}
 
