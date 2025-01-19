@@ -4,7 +4,10 @@ import {AppRoute, AuthorizationStatus} from '../../../const.ts';
 import {useAppDispatch, useAppSelector} from '../../../components/hooks';
 import {getAuthStatus, getAvatarUrl, getUserName} from '../../../store/auth-slice/auth-selector.ts';
 import {logoutAction} from '../../../store/api-actions.ts';
-import {MouseEvent} from 'react';
+import {MouseEvent, memo} from 'react';
+import {getFavoriteOffers} from '../../../store/favorite-slice/favorite-selector.ts';
+import {useEffect} from 'react';
+import {getListOfFavoritesOffers} from '../../../store/api-actions.ts';
 
 function Header(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -13,6 +16,7 @@ function Header(): JSX.Element {
   const currentPath = useLocation().pathname;
   const userLogin = useAppSelector(getUserName);
   const avatarUrl = useAppSelector(getAvatarUrl);
+  const favoritesAmount = useAppSelector(getFavoriteOffers).length;
 
   const handleLogoutClick = (evt: MouseEvent<HTMLElement>) => {
     evt.preventDefault();
@@ -24,6 +28,12 @@ function Header(): JSX.Element {
       });
   };
 
+  useEffect(() => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      dispatch(getListOfFavoritesOffers ());
+    }
+  }, [authorizationStatus, dispatch]);
+
   const actionLink =
     authorizationStatus !== AuthorizationStatus.Auth ? (
       <Link className="header__nav-link" to={AppRoute.Login}>
@@ -34,6 +44,7 @@ function Header(): JSX.Element {
         <span className="header__signout">Sign Out</span>
       </a>
     );
+
   return (
     <header className="header">
       <div className="container">
@@ -48,10 +59,11 @@ function Header(): JSX.Element {
                       <img
                         className="header__avatar user__avatar"
                         src={avatarUrl}
-                        alt='User avatar'
+                        alt="User avatar"
                       />
                     </div>
                     <span className="header__user-name user__name">{userLogin}</span>
+                    <span className="header__favorite-count">{favoritesAmount}</span>
                   </Link>
                 </li>
               )}
@@ -66,4 +78,4 @@ function Header(): JSX.Element {
   );
 }
 
-export default Header;
+export default memo(Header);

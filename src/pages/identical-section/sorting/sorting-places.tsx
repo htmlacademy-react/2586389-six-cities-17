@@ -2,13 +2,14 @@ import {SortTypeList} from '../../../variables/variables.tsx';
 import {useDispatch} from 'react-redux';
 import {useEffect, useRef, useState} from 'react';
 import {useAppSelector} from '../../../components/hooks';
-import {changeSorting} from '../../../store/actions.ts';
+import {changeSorting} from '../../../store/offers-slice/offers-slice.ts';
+import {getSortingType} from '../../../store/offers-slice/offers-selector.ts';
 
 function SortingPlaces(): JSX.Element {
   const dispatch = useDispatch();
   const sortSpanRef = useRef<HTMLElement>(null);
   const [sortingIsOpened, setSortingIsOpened] = useState(false);
-  const currentSort = useAppSelector((state) => state.sort.currentSort);
+  const currentSort = useAppSelector(getSortingType);
 
   useEffect(() => {
     const hideSortList = (evt: MouseEvent) => {
@@ -50,7 +51,7 @@ function SortingPlaces(): JSX.Element {
             tabIndex={0}
             onClick={() => {
               dispatch(changeSorting(sortItem));
-              setSortingIsOpened(false); // Закрываем список после выбора
+              setSortingIsOpened(false);
             }}
           >
             {sortItem}

@@ -1,5 +1,6 @@
 import ReviewsOffer from './reviews-offer.tsx';
 import {Reviews} from '../../../types/types.ts';
+import {memo} from 'react';
 
 interface ReviewsOfferLisrProps {
   reviews: Reviews[];
@@ -21,4 +22,4 @@ function ReviewsOfferList({reviews}: ReviewsOfferLisrProps): JSX.Element {
   );
 }
 
-export default ReviewsOfferList;
+export default memo(ReviewsOfferList);

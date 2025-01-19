@@ -1,39 +1,84 @@
-import {Offers} from '../../types/types.ts';
-import {createSlice} from '@reduxjs/toolkit';
-import {fetchOffers} from '../api-actions.ts';
+import {OffersProcess} from '../../types/types.ts';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {
+  addToFavoriteOffer,
+  fetchOffers,
+  getListOfFavoritesOffers,
+  logoutAction,
+  removeToFavoriteOffer
+} from '../api-actions.ts';
+import {
+  DefCityLocation,
+  DefCityName,
+  SortType,
+  SortTypeList,
+  UpdateFavoriteStatus
+} from '../../variables/variables.tsx';
+import {DataStatus} from '../../const.ts';
+import {defineCityLocation, getOffersByCityName, sortOffers} from '../../utils/utlis.ts';
 
-interface OffersState {
-  offers: Offers[];
-  isLoading: boolean;
-  error: string | null;
-}
-
-const initialState: OffersState = {
-  offers: [],
-  isLoading: false,
-  error: null,
+export const initialState: OffersProcess = {
+  cityName: DefCityName,
+  cityLocation: DefCityLocation,
+  all: [],
+  sorted: [],
+  sortingType: SortTypeList.popular,
+  status: DataStatus.Unknown
 };
 
 const offersSlice = createSlice({
   name: 'offers',
   initialState,
-  reducers: {},
+  reducers: {
+    changeCity: (state, action: PayloadAction<string>) => {
+      state.cityName = action.payload;
+      state.sortingType = SortTypeList.popular;
+      state.sorted = getOffersByCityName(state.all, state.cityName);
+      state.cityLocation = defineCityLocation(state.sorted);
+    },
+    changeSorting: (state, action: PayloadAction<SortType>) => {
+      state.sortingType = action.payload || SortTypeList.popular;
+      state.sorted = sortOffers(getOffersByCityName(state.all, state.cityName), action.payload);
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchOffers.pending, (state) => {
-        state.isLoading = true;
-        state.error = null;
+        state.status = DataStatus.Loading;
       })
       .addCase(fetchOffers.fulfilled, (state, action) => {
-        state.offers = action.payload;
-        state.isLoading = false;
+        state.all = action.payload;
+        state.status = DataStatus.Loaded;
+        state.sorted = getOffersByCityName(state.all, state.cityName);
+        state.cityLocation = defineCityLocation(state.sorted);
       })
-      .addCase(fetchOffers.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.error.message || 'Failed to load offers';
+      .addCase(fetchOffers.rejected, (state) => {
+        state.status = DataStatus.Error;
+      })
+      .addCase(addToFavoriteOffer.fulfilled, (state, action) => {
+        state.all = UpdateFavoriteStatus(state.all, action.payload, true);
+        state.sorted = getOffersByCityName(state.all, state.cityName);
+      })
+      .addCase(removeToFavoriteOffer.fulfilled, (state, action) => {
+        state.all = UpdateFavoriteStatus(state.all, action.payload, false);
+        state.sorted = getOffersByCityName(state.all, state.cityName);
+      })
+      .addCase(getListOfFavoritesOffers.fulfilled, (state, action) => {
+        const favoriteOffers = action.payload;
+
+        state.all = state.all.map((offer) => ({
+          ...offer,
+          isFavorite: favoriteOffers.some((fav) => fav.id === offer.id),
+        }));
+        state.sorted = getOffersByCityName(state.all, state.cityName);
+      })
+      .addCase(logoutAction.fulfilled, (state) => {
+        state.all = state.all.map((offer) => ({...offer, isFavorite: false}));
+        state.sorted = getOffersByCityName(state.all, state.cityName);
       });
-  },
+  }
 });
 
+export const { changeCity, changeSorting } = offersSlice.actions;
 export const offersReducer = offersSlice.reducer;
 export default offersSlice.reducer;

@@ -1,6 +1,6 @@
 import 'leaflet/dist/leaflet.css';
 import UseMap from '../../../components/hooks/use-map.tsx';
-import {useRef, useEffect} from 'react';
+import {useRef, useEffect, memo} from 'react';
 import { Icon, Marker, layerGroup } from 'leaflet';
 import {MarkerInfo} from '../../../variables/variables.tsx';
 import {Offers, City} from '../../../types/types.ts';
@@ -64,4 +64,4 @@ function Map({city, offers, selectedOffers, mapClassName = ''}: MapProps): JSX.E
   );
 }
 
-export default Map;
+export default memo(Map);
