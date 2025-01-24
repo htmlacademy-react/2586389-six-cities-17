@@ -3,8 +3,6 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {
   addToFavoriteOffer,
   fetchOffers,
-  getListOfFavoritesOffers,
-  logoutAction,
   removeToFavoriteOffer
 } from '../api-actions.ts';
 import {
@@ -61,19 +59,6 @@ const offersSlice = createSlice({
       })
       .addCase(removeToFavoriteOffer.fulfilled, (state, action) => {
         state.all = UpdateFavoriteStatus(state.all, action.payload, false);
-        state.sorted = getOffersByCityName(state.all, state.cityName);
-      })
-      .addCase(getListOfFavoritesOffers.fulfilled, (state, action) => {
-        const favoriteOffers = action.payload;
-
-        state.all = state.all.map((offer) => ({
-          ...offer,
-          isFavorite: favoriteOffers.some((fav) => fav.id === offer.id),
-        }));
-        state.sorted = getOffersByCityName(state.all, state.cityName);
-      })
-      .addCase(logoutAction.fulfilled, (state) => {
-        state.all = state.all.map((offer) => ({...offer, isFavorite: false}));
         state.sorted = getOffersByCityName(state.all, state.cityName);
       });
   }

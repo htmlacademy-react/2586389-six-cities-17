@@ -4,7 +4,8 @@ import App from './components/app/app';
 import {Provider} from 'react-redux';
 import {store} from './store';
 import {checkAuthStatus, fetchOffers, getListOfFavoritesOffers} from './store/api-actions.ts';
-import {BrowserRouter} from 'react-router-dom';
+import HistoryRouter from './components/history-router/history-router.tsx';
+import {browserHistory} from './browser-history/browser-history.ts';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -21,9 +22,9 @@ store.dispatch(checkAuthStatus())
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
+      <HistoryRouter history={browserHistory}>
         <App />
-      </BrowserRouter>
+      </HistoryRouter>
     </Provider>
   </React.StrictMode>
 );

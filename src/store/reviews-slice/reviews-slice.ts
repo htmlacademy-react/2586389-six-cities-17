@@ -7,7 +7,7 @@ import {toast} from 'react-toastify';
 const initialState: ReviewsProcess = {
   data: [],
   status: DataStatus.Unknown,
-  posingStatus: PostingStatus.Unknown,
+  postingStatus: PostingStatus.Unknown,
 };
 
 export const reviewsSlice = createSlice({
@@ -29,13 +29,13 @@ export const reviewsSlice = createSlice({
       })
       // @-- post reviews --@ \\
       .addCase(postReviewToOffer.pending, (state) => {
-        state.posingStatus = PostingStatus.Posting;
+        state.postingStatus = PostingStatus.Posting;
       })
       .addCase(postReviewToOffer.fulfilled, (state) => {
-        state.posingStatus = PostingStatus.Posted;
+        state.postingStatus = PostingStatus.Posted;
       })
       .addCase(postReviewToOffer.rejected, (state) => {
-        state.posingStatus = PostingStatus.Error;
+        state.postingStatus = PostingStatus.Error;
         toast.error('Could not send review');
       });
   }
