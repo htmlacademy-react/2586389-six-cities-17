@@ -5,7 +5,7 @@ import {AppRoute} from '../../../const.ts';
 
 function NotFound(): JSX.Element {
   return(
-    <section>
+    <section data-testid='not-found-element'>
       <Helmet>
         <title>404.NotFound</title>
       </Helmet>

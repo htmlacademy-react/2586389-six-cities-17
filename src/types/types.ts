@@ -93,7 +93,7 @@ export interface ErrorMesageType {
 export interface ReviewsProcess {
   data: Reviews[];
   status: DataStatus;
-  posingStatus: PostingStatus;
+  postingStatus: PostingStatus;
 }
 
 export interface NearPlacesProcess {

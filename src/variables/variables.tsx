@@ -117,3 +117,12 @@ export const Cities: City[] = [
     },
   },
 ];
+
+export const LOCATIONS: string[] = [
+  'Paris',
+  'Cologne',
+  'Brussels',
+  'Amsterdam',
+  'Hamburg',
+  'Dusseldorf',
+];

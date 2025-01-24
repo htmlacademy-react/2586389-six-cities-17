@@ -33,7 +33,7 @@ function Favorites (): JSX.Element {
         <title>6 cities: favorites</title>
       </Helmet>
       <Header />
-      <main className='page__main page__main--favorites'>
+      <main className='page__main page__main--favorites' data-testid='favorites-element'>
         <div className='page__favorites-container container'>
           {isFavoritesEmpty ?
             (<FavoritesEmpty />) : (

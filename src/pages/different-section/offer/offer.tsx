@@ -46,7 +46,7 @@ function Offer (): JSX.Element {
         <title>6 sities: offer</title>
       </Helmet>
       <Header />
-      <main className="page__main page__main--offer">
+      <main className="page__main page__main--offer" data-testid='offer-element'>
         <OfferWrapper
           offer={offerData || { goods: [] }}
           reviews={reviews} nearPlaces={nearPlaces}
