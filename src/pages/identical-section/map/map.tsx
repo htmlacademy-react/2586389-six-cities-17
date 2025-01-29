@@ -2,7 +2,7 @@ import 'leaflet/dist/leaflet.css';
 import UseMap from '../../../components/hooks/use-map.tsx';
 import {useRef, useEffect, memo} from 'react';
 import { Icon, Marker, layerGroup } from 'leaflet';
-import {MarkerInfo} from '../../../variables/variables.tsx';
+import {MarkerInfo} from '../../../const.ts';
 import {Offers, City} from '../../../types/types.ts';
 
 interface MapProps {
@@ -59,7 +59,7 @@ function Map({city, offers, selectedOffers, mapClassName = ''}: MapProps): JSX.E
   }
 
   return (
-    <section className={`${mapClassName} map`} ref={mapRef}>
+    <section className={`${mapClassName} map`} ref={mapRef} data-testid="map">
     </section>
   );
 }

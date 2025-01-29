@@ -1,12 +1,12 @@
-import Bookmark from '../../bookmark/bookmark';
-import Premium from '../../premium/premium';
-import Rating from '../../rating/rating';
-import OfferHost from '../offer-host/offer-host';
-import {City, OfferExtended, Offers, Reviews} from '../../../../types/types.ts';
-import FormSendingComments from '../../../../components/form-sending-comments/form-sending-comments.tsx';
-import ReviewsOfferList from '../../reviews/reviews-offer-list.tsx';
-import Map from '../../map/map.tsx';
-import {BookmarkStatus} from '../../../../const.ts';
+import Bookmark from '../bookmark/bookmark.tsx';
+import Premium from '../premium/premium.tsx';
+import Rating from '../rating/rating.tsx';
+import OfferHost from '../offer-host/offer-host.tsx';
+import {City, OfferExtended, Offers, Reviews} from '../../../types/types.ts';
+import FormSendingComments from '../../../components/form-sending-comments/form-sending-comments.tsx';
+import ReviewsOfferList from '../reviews-offer-list/reviews-offer-list.tsx';
+import Map from '../map/map.tsx';
+import {BookmarkStatus} from '../../../const.ts';
 import OfferGallery from '../offer-gallery/offer-gallery.tsx';
 
 interface OfferWraperProps {
@@ -21,7 +21,7 @@ function OfferWrapper ({offer, reviews, nearPlaces, city, selectedOffer}: OfferW
   const { title, type, price, rating, isPremium, bedrooms, maxAdults, goods, isFavorite, id, images } = offer;
 
   return (
-    <section className="offer">
+    <section className="offer" data-testid='offer-wrapper'>
       <OfferGallery images={images || []}/>
       <div className="offer__container container">
         <div className="offer__wrapper">

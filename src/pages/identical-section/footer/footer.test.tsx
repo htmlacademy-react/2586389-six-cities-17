@@ -13,7 +13,6 @@ describe('Component: Footer', () => {
       </HistoryRouter>
     );
 
-    // Ищем логотип после рендера
     const expectedImg = screen.getByRole('img', { name: /6 cities logo/i });
     expect(expectedImg).toBeInTheDocument();
   });

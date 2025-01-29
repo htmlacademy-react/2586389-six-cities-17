@@ -6,12 +6,12 @@ import Spinner from './spinner.tsx';
 import '@testing-library/jest-dom';
 import HistoryRouter from '../../../components/history-router/history-router.tsx';
 import { browserHistory } from '../../../browser-history/browser-history.ts';
-import rootReducer from '../../../store/root-reducer.ts'; // Импортируйте ваш корневой редьюсер
+import rootReducer from '../../../store/root-reducer.ts';
 
 describe('Component: Spinner', () => {
   it('should render correctly', () => {
     const mockStore = configureStore({
-      reducer: rootReducer, // Используйте ваш корневой редьюсер
+      reducer: rootReducer,
     });
 
     render(

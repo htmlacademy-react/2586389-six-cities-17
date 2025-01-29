@@ -1,8 +1,7 @@
 import axios, {AxiosInstance, AxiosResponse, InternalAxiosRequestConfig, AxiosError} from 'axios';
 import {getToken} from './token.ts';
-import {BackendUrl, RequestTimeout} from '../variables/variables.tsx';
 import {ErrorMesageType} from '../types/types.ts';
-import {StatusCodeMapping} from '../variables/variables.tsx';
+import {StatusCodeMapping, BackendUrl, RequestTimeout} from '../const.ts';
 import { toast} from 'react-toastify';
 
 const shouldDisplayError = (response: AxiosResponse) => Boolean(StatusCodeMapping[response.status]);

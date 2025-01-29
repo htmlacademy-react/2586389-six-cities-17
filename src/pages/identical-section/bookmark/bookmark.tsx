@@ -40,7 +40,7 @@ function Bookmark({isFavorite = false, offerId, bookmarkButton}: BookmarkProps):
   };
 
   return(
-    <button className={buttonClass} type="button" onClick={handleBookmarkClick}>
+    <button className={buttonClass} data-testid='bookmark-button' type="button" onClick={handleBookmarkClick}>
       <svg className={`${bookmarkButton}__bookmark-icon`} width={bookmarkW} height={bookmarkH}>
         <use xlinkHref="#icon-bookmark" />
       </svg>

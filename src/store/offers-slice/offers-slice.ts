@@ -11,7 +11,7 @@ import {
   SortType,
   SortTypeList,
   UpdateFavoriteStatus
-} from '../../variables/variables.tsx';
+} from '../../const.ts';
 import {DataStatus} from '../../const.ts';
 import {defineCityLocation, getOffersByCityName, sortOffers} from '../../utils/utlis.ts';
 

@@ -1,7 +1,7 @@
 import {AppState} from '../../types/state.ts';
 import {NameSpace} from '../../const.ts';
 import {Offers} from '../../types/types.ts';
-import {SortType} from '../../variables/variables.tsx';
+import {SortType} from '../../const.ts';
 
 export const getAllOffers = (state: AppState) => state[NameSpace.OffersSpace].all;
 export const getSelectedCity = (state: AppState): string => state[NameSpace.OffersSpace].cityName;

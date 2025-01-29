@@ -1,13 +1,12 @@
-import {Offers, Reviews} from '../../types/types.ts';
+import {City, Location, Offers, Reviews} from '../../types/types.ts';
 import {faker} from '@faker-js/faker';
 import {Action, ThunkDispatch} from '@reduxjs/toolkit';
 import {AppState} from '../../types/state.ts';
 import {createApi} from '../../services/api.ts';
 import {getOffersByCityName, getRandomInteger} from '../utlis.ts';
 import {UserData} from '../../types/types.ts';
-import {AuthProcess} from '../../types/types.ts';
 import {AuthorizationStatus, DataStatus, NameSpace, PostingStatus} from '../../const.ts';
-import {DefCityLocation, DefCityName, SortTypeList} from '../../variables/variables.tsx';
+import {DefCityLocation, DefCityName, SortTypeList} from '../../const.ts';
 
 export const makeFakeOffers = ():Offers => ({
   id: faker.string.nanoid(),
@@ -41,6 +40,21 @@ export const makeFakeOffersForCity = (cityName: string): Offers => ({
   }
 });
 
+export const makeFakeCity = (): City => ({
+  name: faker.location.city(),
+  location: {
+    latitude: faker.location.latitude(),
+    longitude: faker.location.longitude(),
+    zoom: faker.number.int()
+  }
+});
+
+export const makeFakeLocation = (): Location => ({
+  latitude: faker.location.latitude(),
+  longitude: faker.location.longitude(),
+  zoom: faker.number.int(18)
+});
+
 export const makeFakeReviews = (): Reviews => ({
   id: faker.string.nanoid(),
   comment: faker.string.alpha(),
@@ -60,7 +74,6 @@ export const makeFakeReviewData = () => ({
 });
 
 export const makeFakeImages = (): string[] => Array.from({ length: getRandomInteger(6, 10) }, () => faker.system.filePath());
-
 
 export const makeFakeOfferExtended = () => ({
   id: faker.string.nanoid(),
@@ -103,17 +116,6 @@ export const makeFakeUserInfo = (): UserData => ({
   isPro: faker.datatype.boolean(),
   offerId: faker.string.uuid(),
   status: faker.number.int({ min: 200, max: 204 }),
-});
-
-export const makeFakeAuthState = (): AuthProcess => ({
-  status: faker.helpers.arrayElement([
-    AuthorizationStatus.Auth,
-    AuthorizationStatus.NoAuth,
-    AuthorizationStatus.Unknown,
-  ]),
-  isErrorInAuthRequest: faker.datatype.boolean(),
-  isErrorInCheckAuthRequest: faker.datatype.boolean(),
-  userInfo: faker.datatype.boolean() ? makeFakeUserInfo() : null, // Иногда userInfo может быть null
 });
 
 export type AppThunkDispatch = ThunkDispatch<AppState, ReturnType<typeof createApi>, Action>;

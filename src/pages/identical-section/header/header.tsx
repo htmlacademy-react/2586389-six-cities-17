@@ -36,24 +36,24 @@ function Header(): JSX.Element {
 
   const actionLink =
     authorizationStatus !== AuthorizationStatus.Auth ? (
-      <Link className="header__nav-link" to={AppRoute.Login}>
+      <Link className="header__nav-link" to={AppRoute.Login} data-testid='sign-in-link'>
         <span className="header__signout">Sign in</span>
       </Link>
     ) : (
-      <a href="#" className="header__nav-link" onClick={handleLogoutClick}>
+      <a href="#" className="header__nav-link" onClick={handleLogoutClick} data-testid='sign-out-a'>
         <span className="header__signout">Sign Out</span>
       </a>
     );
 
   return (
-    <header className="header">
+    <header className="header" data-testid='header-container'>
       <div className="container">
         <div className="header__wrapper">
           <HeaderSixSities />
           <nav className="header__nav">
             <ul className="header__nav-list">
               {authorizationStatus === AuthorizationStatus.Auth && (
-                <li className="header__nav-item user">
+                <li className="header__nav-item user" data-testid='user-info'>
                   <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                       <img

@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import Bookmark from '../../bookmark/bookmark.tsx';
-import { Offers } from '../../../../types/types.ts';
-import {AppRoute} from '../../../../const.ts';
+import Bookmark from '../bookmark/bookmark.tsx';
+import { Offers } from '../../../types/types.ts';
+import {AppRoute} from '../../../const.ts';
 import { generatePath } from 'react-router-dom';
-import Premium from '../../premium/premium.tsx';
-import {BookmarkStatus} from '../../../../const.ts';
+import Premium from '../premium/premium.tsx';
+import {BookmarkStatus} from '../../../const.ts';
 
 interface CardOfferProps {
   offers: Offers;
@@ -33,6 +33,7 @@ function CardOffer(
       className={`${cardType}__card place-card ${cardClassName}`}
       onMouseEnter={onOfferCardMouseEnter}
       onMouseLeave={onOfferCardMouseLeave}
+      data-testid='card-offer-element'
     >
       <Premium isPremium={isPremium}/>
       <div className={`${cardType}__image-wrapper place-card__image-wrapper ${imageWrapperClassName}`}>
@@ -54,7 +55,7 @@ function CardOffer(
           </div>
           <Bookmark isFavorite={isFavorite} offerId={id} bookmarkButton={BookmarkStatus.PlacesCard}/>
         </div>
-        <div className="place-card__rating rating">
+        <div className="place-card__rating rating" data-testid="rating-element">
           <div className="place-card__stars rating__stars">
             <span style={{width: '80%'}}/>
             <span className="visually-hidden">{rating}</span>

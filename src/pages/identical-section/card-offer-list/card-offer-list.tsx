@@ -1,6 +1,6 @@
 import CardOffer from '../card-offer/card-offer.tsx';
 import {useState} from 'react';
-import {Offers} from '../../../../types/types.ts';
+import {Offers} from '../../../types/types.ts';
 
 
 interface CardOfferListProps {
@@ -36,7 +36,7 @@ function CardOfferList(
     }
   };
   return (
-    <div className={`${cardType}__places-list places-list ${listClassName}`}>
+    <div className={`${cardType}__places-list places-list ${listClassName}`} data-testid='card-offer-list-element'>
       {offers.map((offer) => (
         <CardOffer
           key={offer.id}

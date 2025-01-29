@@ -8,7 +8,7 @@ function ReviewsOffer({reviews}: ReviewsOfferProps):JSX.Element {
   const {comment, date, rating, user} = reviews;
 
   return (
-    <ul className="reviews__list">
+    <ul className="reviews__list" data-testid="reviews">
       <li className="reviews__item">
         <div className="reviews__user user">
           <div className="reviews__avatar-wrapper user__avatar-wrapper">

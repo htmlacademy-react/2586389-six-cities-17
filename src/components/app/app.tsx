@@ -7,8 +7,11 @@ import Offer from '../../pages/different-section/offer/offer';
 import NotFound from '../../pages/different-section/not-found/not-found';
 import Login from '../../pages/different-section/login/login';
 import PrivateRoute from '../private-route/private-route';
+import {useAppSelector} from '../hooks';
+import {getAuthStatus} from '../../store/auth-slice/auth-selector.ts';
 
 function App(): JSX.Element {
+  const authStatus = useAppSelector(getAuthStatus);
 
   return (
     <HelmetProvider>
@@ -18,7 +21,7 @@ function App(): JSX.Element {
           <Route
             path={AppRoute.Favorites}
             element={
-              <PrivateRoute>
+              <PrivateRoute authorizationStatus={authStatus}>
                 <Favorites/>
               </PrivateRoute>
             }

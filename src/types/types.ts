@@ -1,5 +1,5 @@
 import {AuthorizationStatus, DataStatus, PostingStatus} from '../const.ts';
-import {SortType} from '../variables/variables.tsx';
+import {SortType} from '../const.ts';
 
 export interface OfferIrregular {
     id: string;

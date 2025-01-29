@@ -1,6 +1,6 @@
 import {describe, it} from 'vitest';
 import {NameSpace} from '../../../const.ts';
-import {DefCityName, SortTypeList} from '../../../variables/variables.tsx';
+import {DefCityName, SortTypeList} from '../../../const.ts';
 import {getRandomInteger} from '../../../utils/utlis.ts';
 import {AppState} from '../../../types/state.ts';
 import {makeFakeOffers} from '../../../utils/mocks/mocks.ts';

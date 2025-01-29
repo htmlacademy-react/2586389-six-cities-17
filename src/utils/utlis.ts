@@ -1,5 +1,7 @@
 import {Offers} from '../types/types.ts';
-import {SortType, SortTypeList} from '../variables/variables.tsx';
+import {SortType, SortTypeList} from '../const';
+import { createAction } from '@reduxjs/toolkit';
+import { AppRoute } from '../const';
 
 const compareOffersPriceLow = (a:Offers, b: Offers) => a.price - b.price;
 const compareOffersPriceHigh = (a:Offers, b: Offers) => b.price - a.price;
@@ -28,3 +30,5 @@ export const defineCityLocation = (offers: Offers[]) => offers[0]?.city.location
 
 export const getRandomInteger = (min: number, max: number): number =>
   Math.floor(Math.random() * (max - min + 1)) + min;
+
+export const redirectToRoute = createAction<AppRoute>('navigation/redirectToRoute');
