@@ -6,7 +6,7 @@ import {makeFakeOffers} from '../../../utils/mocks/mocks.ts';
 import {getRandomInteger} from '../../../utils/utlis.ts';
 import {nearPlacesReducer} from '../near-places-slice.ts';
 import {faker} from '@faker-js/faker';
-import {UpdateFavoriteStatus} from '../../../variables/variables.tsx';
+import {UpdateFavoriteStatus} from '../../../const.ts';
 
 describe('NearPlaces Slice', () => {
   const emptyAction = { type: '' };

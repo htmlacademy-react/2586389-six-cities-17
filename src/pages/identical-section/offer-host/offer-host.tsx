@@ -1,4 +1,4 @@
-import {OfferExtended} from '../../../../types/types.ts';
+import {OfferExtended} from '../../../types/types.ts';
 import {memo} from 'react';
 
 interface OfferHostProps {
@@ -13,7 +13,7 @@ function OfferHost({offerExtended}: OfferHostProps): JSX.Element {
   }
 
   return (
-    <div className="offer__host">
+    <div className="offer__host" data-testid='offer-host'>
       <h2 className="offer__host-title">Meet the host</h2>
       <div className="offer__host-user user">
         <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">

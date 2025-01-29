@@ -6,7 +6,7 @@ import {getFavoriteOffers} from '../../../store/favorite-slice/favorite-selector
 import {Offers} from '../../../types/types.ts';
 import {changeCity} from '../../../store/offers-slice/offers-slice.ts';
 import {Link} from 'react-router-dom';
-import CardOfferList from '../../identical-section/card/card-offer-list/card-offer-list.tsx';
+import CardOfferList from '../../identical-section/card-offer-list/card-offer-list.tsx';
 import FavoritesEmpty from '../favorites-empty/favorites-empty.tsx';
 
 function Favorites (): JSX.Element {
@@ -28,7 +28,7 @@ function Favorites (): JSX.Element {
   };
 
   return (
-    <div className="page">
+    <div className="page" data-testid='favorites'>
       <Helmet>
         <title>6 cities: favorites</title>
       </Helmet>
@@ -39,7 +39,7 @@ function Favorites (): JSX.Element {
             (<FavoritesEmpty />) : (
               <section className='favorites'>
                 <h1 className='favorites__title'>Saved listing</h1>
-                <ul className='favorites__list'>
+                <ul className='favorites__list' data-testid='favorites-list'>
                   {Object.entries(offersByCity).map(([city, cityOffers]) => (
                     <li key={city} className='favorites__locations-items'>
                       <div className='favorites__locations locations locations--current'>

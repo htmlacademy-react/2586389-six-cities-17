@@ -1,28 +1,37 @@
-/*import {describe} from 'vitest';
+import {describe} from 'vitest';
 import {render, screen} from '@testing-library/react';
 import NotFound from './not-found.tsx';
 import '@testing-library/jest-dom';
 import HistoryRouter from '../../../components/history-router/history-router.tsx';
 import {browserHistory} from '../../../browser-history/browser-history.ts';
+import {HelmetProvider} from 'react-helmet-async';
+import {Provider} from 'react-redux';
+import {configureStore} from '@reduxjs/toolkit';
+import rootReducer from '../../../store/root-reducer.ts';
 
-describe('Component: LoginLocations', () => {
+const mockStore = configureStore({
+  reducer: rootReducer,
+});
+
+describe('Component: NotFound', () => {
   it('should render correctly', () => {
-    const expectedText = /404.NotFound/i;
-    const expectedText1 = /404. Not found/i;
-    const expectedText2 = /You are on a non-existent page./i;
-    const expectedText3 = /Click to return to the main page/i;
+    const expectedText1 = '404. Not found';
+    const expectedText2 = 'You are on a non-existent page.';
+    const expectedLink3 = 'Click to return to the main page';
 
     render(
-      <HistoryRouter history={browserHistory}>
-        <NotFound />
-      </HistoryRouter>
+      <Provider store={mockStore}> {/* Оберните в Provider */}
+        <HelmetProvider>
+          <HistoryRouter history={browserHistory}>
+            <NotFound />
+          </HistoryRouter>
+        </HelmetProvider>
+      </Provider>
     );
 
-
-    expect(screen.getByText(expectedText)).toBeInTheDocument();
     expect(screen.getByText(expectedText1)).toBeInTheDocument();
     expect(screen.getByText(expectedText2)).toBeInTheDocument();
-    expect(screen.getByText(expectedText3)).toBeInTheDocument();
+    expect(screen.getByText(expectedLink3)).toBeInTheDocument();
 
   });
-});*/
+});

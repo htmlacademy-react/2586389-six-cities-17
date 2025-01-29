@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import HeaderSixSities from '../../identical-section/header-six-sities/header-six-sities';
-import LoginLocation from '../../identical-section/login-component/login-locations/login-locations';
+import LoginLocation from '../../identical-section/login-locations/login-locations';
 import {useRef} from 'react';
 import {useAppDispatch} from '../../../components/hooks';
 import {useNavigate} from 'react-router-dom';
@@ -54,6 +54,7 @@ function Login (): JSX.Element {
                   type="email"
                   name="email"
                   placeholder="Email"
+                  data-testid="email-input"
                   ref={loginRef}
                   required
                 />
@@ -66,6 +67,7 @@ function Login (): JSX.Element {
                   name="password"
                   placeholder="Password"
                   ref={passwordRef}
+                  data-testid="password-input"
                   pattern='^.*(?=.*[a-zа-яё])(?=.*\d).*$'
                   title='Пароль должен содержать как минимум 1 букву и 1 цифру'
                   required

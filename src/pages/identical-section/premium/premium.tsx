@@ -12,7 +12,7 @@ function Premium ({isPremium}: PremiumProps): JSX.Element {
 
   const premiumStatusAuth =
     authorizationStatus === AuthorizationStatus.Auth && isPremium ? (
-      <div className="place-card__mark">
+      <div className="place-card__mark" data-testid='premium-mark'>
         <span>Premium</span>
       </div>
     ) : null;

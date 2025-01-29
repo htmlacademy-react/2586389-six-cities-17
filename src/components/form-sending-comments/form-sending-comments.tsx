@@ -1,6 +1,6 @@
 import {ChangeEvent, useState, memo} from 'react';
-import FormSendingRatings from './form-sending-rating/form-sending-rating.tsx';
-import {MaxLengthOfReview, MinLengthOfReview, RatingsStars} from '../../variables/variables.tsx';
+import FormSendingRatings from '../form-sending-rating/form-sending-rating.tsx';
+import {MaxLengthOfReview, MinLengthOfReview, RatingsStars} from '../../const.ts';
 import {useAppDispatch, useAppSelector} from '../hooks';
 import {getPostingStatus} from '../../store/reviews-slice/reviews-selector.ts';
 import {getOfferData} from '../../store/offer-extended-slice/offer-extended-selector.ts';
@@ -44,7 +44,7 @@ function FormSendingComments():JSX.Element {
 
   const statusForm =
     authorizationStatus !== AuthorizationStatus.Auth ? (
-      <Link to={AppRoute.Login}>
+      <Link to={AppRoute.Login} data-testid='review-sign-in-link'>
         <button
           style={{
             backgroundColor: '#4481C3',
@@ -68,6 +68,7 @@ function FormSendingComments():JSX.Element {
         <textarea
           className="reviews__textarea form__textarea"
           id="review"
+          data-testid='review-textarea'
           name="review"
           placeholder="Tell how was your stay, what you like and what can be improved"
           value={reviewFormState.comment}
@@ -78,7 +79,7 @@ function FormSendingComments():JSX.Element {
             }));
           }}
         />
-        <div className="reviews__button-wrapper">
+        <div className="reviews__button-wrapper" data-testid='reviews-button-wrapper'>
           <p className="reviews__help">
             To submit review please make sure to set{' '}
             <span className="reviews__star">rating</span> and describe
@@ -88,6 +89,7 @@ function FormSendingComments():JSX.Element {
           <button
             className="reviews__submit form__submit button"
             type="submit"
+            data-testid='reviews-submit-button'
             disabled={!submitCondition || postingStatus === PostingStatus.Posting}
           >
             {postingStatus === PostingStatus.Posting ? 'Posting...' : 'Submit'}
@@ -101,7 +103,7 @@ function FormSendingComments():JSX.Element {
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
-      <div className="reviews__rating-form form__rating">
+      <div className="reviews__rating-form form__rating" data-testid='review-rating'>
         {RatingsStars.map(({value, title}) => (
           <FormSendingRatings
             key={value}

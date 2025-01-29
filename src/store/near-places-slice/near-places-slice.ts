@@ -2,7 +2,7 @@ import {NearPlacesProcess} from '../../types/types.ts';
 import {DataStatus, NameSpace} from '../../const.ts';
 import {createSlice} from '@reduxjs/toolkit';
 import {addToFavoriteOffer, fetchNearPlacesOffers, logoutAction, removeToFavoriteOffer} from '../api-actions.ts';
-import {UpdateFavoriteStatus} from '../../variables/variables.tsx';
+import {UpdateFavoriteStatus} from '../../const.ts';
 
 const initialState: NearPlacesProcess = {
   data: [],

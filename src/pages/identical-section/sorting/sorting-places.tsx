@@ -1,4 +1,4 @@
-import {SortTypeList} from '../../../variables/variables.tsx';
+import {SortTypeList} from '../../../const.ts';
 import {useDispatch} from 'react-redux';
 import {useEffect, useRef, useState} from 'react';
 import {useAppSelector} from '../../../components/hooks';
@@ -30,7 +30,7 @@ function SortingPlaces(): JSX.Element {
   }, []);
 
   return (
-    <form className="places__sorting" action="#" method="get">
+    <form className="places__sorting" action="#" method="get" data-testid="sorting-places-form">
       <span className="places__sorting-caption">Sort by</span>
       <span
         className="places__sorting-type"
@@ -49,6 +49,7 @@ function SortingPlaces(): JSX.Element {
             key={sortItem}
             className={`places__option${sortItem === currentSort ? ' places__option--active' : ''}`}
             tabIndex={0}
+            data-testid='sorting-places-option'
             onClick={() => {
               dispatch(changeSorting(sortItem));
               setSortingIsOpened(false);

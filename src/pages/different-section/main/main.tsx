@@ -1,8 +1,8 @@
 import { Helmet } from 'react-helmet-async';
 import Locations from '../../identical-section/locations/locations';
 import {Offers} from '../../../types/types';
-import {Cities} from '../../../variables/variables.tsx';
-import CardOfferList from '../../identical-section/card/card-offer-list/card-offer-list.tsx';
+import {Cities} from '../../../const.ts';
+import CardOfferList from '../../identical-section/card-offer-list/card-offer-list.tsx';
 import Map from '../../identical-section/map/map';
 import { useAppSelector, useAppDispatch} from '../../../components/hooks';
 import {changeCity} from '../../../store/offers-slice/offers-slice.ts';
@@ -43,9 +43,8 @@ function Main(): JSX.Element {
     }
   };
 
-
   return (
-    <div className="page page--gray page--main">
+    <div className="page page--gray page--main" data-testid='main'>
       <Helmet>
         <title>6 sities</title>
       </Helmet>
@@ -60,7 +59,7 @@ function Main(): JSX.Element {
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">
-                  {filteredOffers.length} places to stay in {selectedCity}
+                  {filteredOffers.length} place{filteredOffers.length > 1 ? 's' : ''} to stay in {selectedCity}
                 </b>
                 <SortingPlaces />
                 <CardOfferList

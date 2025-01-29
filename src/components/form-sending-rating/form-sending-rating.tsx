@@ -17,6 +17,7 @@ function FormSendingRatings ({value, title, onRatingButtonChange, checked}: Form
         id={`${value}-stars`}
         type="radio"
         checked={checked}
+        data-testid={`rating-input-${value}`}
         onChange={(e) => {
           onRatingButtonChange(Number(e.target.value));
         }}
@@ -25,6 +26,7 @@ function FormSendingRatings ({value, title, onRatingButtonChange, checked}: Form
         htmlFor={`${value}-stars`}
         className="reviews__rating-label form__rating-label"
         title={title}
+        data-testid={`rating-label-${value}`}
       >
         <svg className="form__star-image" width={37} height={33}>
           <use xlinkHref="#icon-star"/>

@@ -6,7 +6,7 @@ import {
   SortTypeList,
   LOCATIONS,
   UpdateFavoriteStatus
-} from '../../../variables/variables.tsx';
+} from '../../../const.ts';
 import {DataStatus} from '../../../const.ts';
 import {changeCity, offersReducer, changeSorting} from '../offers-slice.ts';
 import {defineCityLocation, getOffersByCityName, sortOffers} from '../../../utils/utlis.ts';

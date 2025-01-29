@@ -87,7 +87,7 @@ describe('ReviewsProcess Slice', () => {
     };
 
     const expectedState: ReviewsProcess = {
-      data: [], // Отзыв не добавляется в data
+      data: [],
       status: DataStatus.Unknown,
       postingStatus: PostingStatus.Posted,
     };
@@ -109,15 +109,9 @@ describe('ReviewsProcess Slice', () => {
       postingStatus: PostingStatus.Error,
     };
 
-    // Мокаем toast.error
     const toastErrorMock = vi.spyOn(toast, 'error');
-
     const result = reviewsReducer(initialState, postReviewToOffer.rejected);
-
-    // Проверяем состояние
     expect(result).toEqual(expectedState);
-
-    // Проверяем, что toast.error был вызван
     expect(toastErrorMock).toHaveBeenCalledWith('Could not send review');
   });
 });
